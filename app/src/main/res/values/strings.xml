@@ -49,4 +49,6 @@
     <string name="subTitle_shop">Shop</string>
 
     <string name="title_settings">Settings</string>
+    <string name="subTitle_settings">Advanced settings</string>
+    <string name="subTitle_preferences">Preferences</string>
 </resources>

@@ -59,6 +59,41 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.90" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.30" />
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/cont_maps"
         android:layout_width="match_parent"
@@ -68,4 +103,31 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_helper_3"/>
+
+    <LinearLayout
+        android:id="@+id/app_searchbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_gray_2"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/img_helper_6"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_7"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_5"
+        app:layout_constraintVertical_bias="0.0">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/app_ic_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_9"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_7"
+        app:layout_constraintTop_toTopOf="@id/img_helper_5"
+        app:layout_constraintBottom_toBottomOf="@id/img_helper_6"
+        app:srcCompat="@drawable/ic_search_green_24dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
