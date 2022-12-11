@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">LitterMeUp</string>
+
+    <string name="hint_username">Username</string>
+    <string name="hint_email">  Email</string>
+    <string name="hint_password"> Password</string>
+
+    <string name="txt_register">Register</string>
+    <string name="txt_login">Login</string>
+
+    <string name="app_welcome">Welcome</string>
+    <string name="app_welcomeBack">Welcome back</string>
+    <string name="app_sub_welcome">Let\'s start by creating a profile</string>
+    <string name="app_sub_welcomeBack">Continue saving the world</string>
+
+    <string name="app_question_register">Don\'t have an account?</string>
+    <string name="app_question_login">Already have an account?</string>
+
+    <string name="title_home">Home</string>
+    <string name="subTitle_home_username">Hi username</string>
+    <string name="subTitle_home">Welcome back</string>
+    <string name="title_littercash">LitterCash</string>
+    <string name="placeholder_pointsToCash">€ LitterMoney</string>
+    <string name="placeholder_location">Location</string>
+    <string name="subTitle_history">History</string>
+    <string name="placeholder_contributions">X contribution(s)</string>
+    <string name="placeholder_contributionsInDays">X day(s)</string>
+    <string name="placeholder_contributionInHours">X hour(s)</string>
+
+    <string name="title_dashboard">Dashboard</string>
+    <string name="subTitle_dashboard">See where you can help.</string>
+    <string name="subTitle_camera">Start reporting trash on the street</string>
+    <string name="subTitle_openCamera">Open camera</string>
+    <string name="small_trash">Small trash</string>
+    <string name="big_trash">Big trash</string>
+    <string name="subTitle_feed">Feed</string>
+
+
+    <string name="title_maps">Maps</string>
+    <string name="subTitle_maps">Save the world, by starting locally</string>
+
+    <string name="title_profile">Profile</string>
+    <string name="subTitle_profile">Basic settings</string>
+    <string name="placeholder_username">Username</string>
+    <string name="placeholder_points">LitterPoints</string>
+    <string name="placeholder_level">Level</string>
+    <string name="subTitle_friends">Friends</string>
+    <string name="subTitle_friends_more">more friends</string>
+    <string name="subTitle_shop">Shop</string>
+
+    <string name="title_settings">Settings</string>
+</resources>
