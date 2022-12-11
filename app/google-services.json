@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "534095609884",
+    "project_id": "trends-littermeup",
+    "storage_bucket": "trends-littermeup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534095609884:android:d127f64df47ab235a85fd9",
+        "android_client_info": {
+          "package_name": "be.ehb.trends_littermeup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534095609884-dgii51otdsdebvfl8nutqjvh3950kh27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdas5dBPD_HhfB7WbNlaLQVvPzXBhDHvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534095609884-dgii51otdsdebvfl8nutqjvh3950kh27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
