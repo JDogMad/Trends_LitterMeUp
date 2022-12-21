@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "534095609884",
+    "firebase_url": "https://trends-littermeup-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "trends-littermeup",
     "storage_bucket": "trends-littermeup.appspot.com"
   },

@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import be.ehb.trends_littermeup.DAO.UserDAO;
+
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     @Override
@@ -35,13 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
             return;
         }
-
         Button btnRegister = findViewById(R.id.btn_register);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               registerUser();
+                registerUser();
             }
         });
 
@@ -59,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText txtEmail = findViewById(R.id.txt_email);
         EditText txtPassword = findViewById(R.id.txt_password);
         EditText txtUsername = findViewById(R.id.txt_username);
-
+        UserDAO userDAO = new UserDAO();
         String username = txtUsername.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
@@ -83,6 +84,12 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
+                                User newUser = new User(email,username,mAuth.getCurrentUser().getUid());
+                                userDAO.add(newUser).addOnSuccessListener(succes ->{
+                                    Toast.makeText(RegisterActivity.this, "Succes", Toast.LENGTH_SHORT).show();
+                                }).addOnFailureListener(failure ->{
+                                    Toast.makeText(RegisterActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                                });
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 showMainActivity();
                             } else {

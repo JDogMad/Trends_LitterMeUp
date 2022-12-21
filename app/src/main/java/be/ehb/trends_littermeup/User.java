@@ -1,15 +1,32 @@
 package be.ehb.trends_littermeup;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+
+import java.util.List;
+
 public class User {
-    String email, password, username;
+    private List<Integer> friendId;
+    private String email, password, username;
+    private int id, points;
+    private double balance;
+    private Image profilePicture;
+    static int counter = 1;
+    private String uid;
+
+
 
     public User() {
     }
 
-    public User(String email, String password, String username) {
+    public User(String email, String username, String uid) {
+        this.uid = uid;
+        this.points = 0;
+        this.balance = 0;
+        this.id = counter;
         this.email = email;
-        this.password = password;
         this.username = username;
+        counter++;
     }
 
     public User(String email, String password) {
@@ -39,5 +56,49 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<Integer> getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(List<Integer> friendId) {
+        this.friendId = friendId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public Image getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getUid() {
+        return uid;
     }
 }
