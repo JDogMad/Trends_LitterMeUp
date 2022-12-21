@@ -122,6 +122,19 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_3"
         app:layout_constraintVertical_bias="0.0"/>
 
+    <LinearLayout
+        android:id="@+id/app_shape_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_2"
+        android:orientation="horizontal"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_3"
+        app:layout_constraintVertical_bias="0.0"/>
+
     <TextView
         android:id="@+id/app_camera"
         android:layout_width="0dp"
@@ -135,68 +148,48 @@
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_3" />
 
-    <LinearLayout
-        android:id="@+id/app_shape_2"
+    <Button
+        android:id="@+id/btn_camera_smallTrash"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/app_shape_gray_1"
         android:orientation="horizontal"
+        android:text="@string/small_trash"
+        android:textColor="@color/green_1"
+        app:backgroundTint="@color/main_gray"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
         app:layout_constraintStart_toStartOf="@+id/img_helper_5"
         app:layout_constraintTop_toTopOf="@+id/img_helper_9" />
 
-    <TextView
-        android:id="@+id/app_small_trash"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/small_trash"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/img_helper_5"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
-
-    <LinearLayout
-        android:id="@+id/app_shape_3"
+    <Button
+        android:id="@+id/btn_camera_bigTrash"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/app_shape_gray_1"
         android:orientation="horizontal"
+        android:text="@string/big_trash"
+        android:textColor="@color/green_1"
+        app:backgroundTint="@color/main_gray"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
         app:layout_constraintStart_toStartOf="@+id/img_helper_7"
         app:layout_constraintTop_toTopOf="@+id/img_helper_9" />
 
-    <TextView
-        android:id="@+id/app_big_trash"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/big_trash"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/img_helper_7"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
-
-
-    <TextView
+    <Button
         android:id="@+id/app_openCamera"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:background="?android:selectableItemBackground"
         android:text="@string/subTitle_openCamera"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@id/img_helper_1" />
+        app:layout_constraintTop_toTopOf="@+id/img_helper_10" />
 
     <TextView
         android:id="@+id/app_feed_sub"

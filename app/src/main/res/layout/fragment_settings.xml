@@ -214,7 +214,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
     <Button
-        android:id="@+id/app_ic_arrow"
+        android:id="@+id/btn_arrow_language"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_green_next"
@@ -252,7 +252,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
 
     <Button
-        android:id="@+id/app_ic_arrow"
+        android:id="@+id/btn_arrow_achievement"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_green_next"
@@ -328,7 +328,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_12" />
 
     <Button
-        android:id="@+id/app_ic_arrow"
+        android:id="@+id/btn_arrow_feedback"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_green_next"
@@ -392,6 +392,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_16" />
 
 
+    <!-- TODO: Make this a logout button + functionality -->
     <ImageView
         android:id="@+id/app_ic_logout"
         android:layout_width="0dp"
