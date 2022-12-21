@@ -29,9 +29,33 @@ public class User {
         counter++;
     }
 
+
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "friendId=" + friendId +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", id=" + id +
+                ", points=" + points +
+                ", balance=" + balance +
+                ", profilePicture=" + profilePicture +
+                ", uid='" + uid + '\'' +
+                '}';
+    }
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public Integer getUserLevel(int points){
+        Integer level = (int) Math.floor(Math.sqrt(points) / 10);
+
+        return level;
     }
 
     public String getEmail() {
@@ -100,5 +124,9 @@ public class User {
 
     public String getUid() {
         return uid;
+    }
+
+    public User getUser(){
+        return this;
     }
 }
