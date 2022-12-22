@@ -24,8 +24,8 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //final TextView textView = binding.textie;
-        //profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // TODO: Don't forget to call the adapter and link it with the ui
+
         return root;
     }
 

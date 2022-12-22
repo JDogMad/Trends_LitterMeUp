@@ -315,7 +315,7 @@
         app:srcCompat="@drawable/ic_green_feedback" />
 
     <TextView
-        android:id="@+id/title_nightmode"
+        android:id="@+id/title_feedback"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

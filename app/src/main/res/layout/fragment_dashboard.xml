@@ -109,6 +109,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.45" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
     <LinearLayout
         android:id="@+id/app_shape_1"
         android:layout_width="0dp"
@@ -202,4 +209,16 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_11" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_feed_posts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+        app:layout_constraintTop_toBottomOf="@+id/img_helper_12"
+        tools:itemCount="1"
+        tools:listitem="@layout/adapter_feed" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

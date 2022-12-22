@@ -131,6 +131,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.92" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <TextView
         android:id="@+id/app_profile_sub"
         android:layout_width="0dp"
@@ -160,7 +167,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/placeholder_profile_pic"
+        android:id="@+id/img_user_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
@@ -221,121 +228,29 @@
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
 
-    <TextView
-        android:id="@+id/app_moreFriends_sub"
+    <Button
+        android:id="@+id/btn_moreFriends"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="?android:selectableItemBackground"
         android:text="@string/subTitle_friends_more"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_6"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_17"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
 
-    <LinearLayout
-    android:id="@+id/app_shape_3"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:background="@drawable/app_shape_2"
-    android:orientation="horizontal"
-    app:layout_constraintHeight_percent="0.1"
-    app:layout_constraintBottom_toBottomOf="@+id/img_helper_11"
-    app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-    app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-    app:layout_constraintTop_toTopOf="@+id/img_helper_10"
-    app:layout_constraintVertical_bias="0.0">
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/placeholder_profile_pic2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_friends"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_11"
-        app:layout_constraintDimensionRatio="2:3"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_5"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_helper_10"
-        app:srcCompat="@drawable/placeholder_profile2"
-        android:contentDescription="profile_pic" />
-
-    <TextView
-        android:id="@+id/txt_username_friend"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/placeholder_username"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_6"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_10" />
-
-    <TextView
-        android:id="@+id/txt_level_friend"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_level"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_6"
-        app:layout_constraintTop_toBottomOf="@+id/txt_username_friend" />
-
-    <LinearLayout
-        android:id="@+id/app_shape_4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/app_shape_2"
-        android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_13"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_12"
-        app:layout_constraintVertical_bias="0.0">
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/placeholder_profile_pic3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_13"
-        app:layout_constraintDimensionRatio="2:3"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_5"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_12"
-        app:srcCompat="@drawable/placeholder_profile3"
-        android:contentDescription="profile_pic" />
-
-    <TextView
-        android:id="@+id/txt_username_friend2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/placeholder_username"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_6"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_12" />
-
-    <TextView
-        android:id="@+id/txt_level_friend2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_level"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_6"
-        app:layout_constraintTop_toBottomOf="@+id/txt_username_friend2" />
+        tools:itemCount="2"
+        tools:listitem="@layout/adapter_friends" />
 
     <TextView
         android:id="@+id/app_shop_sub"

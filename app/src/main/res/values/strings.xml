@@ -22,6 +22,8 @@
     <string name="title_littercash">LitterCash</string>
     <string name="placeholder_pointsToCash">€ LitterMoney</string>
     <string name="placeholder_location">Location</string>
+    <string name="placeholder_category">Category</string>
+    <string name="placeholder_pointsGained">X points</string>
     <string name="subTitle_history">History</string>
     <string name="placeholder_contributions">X contribution(s)</string>
     <string name="placeholder_contributionsInDays">X day(s)</string>
@@ -60,4 +62,7 @@
     <string name="title_terms">Terms and conditions</string>
     <string name="title_privacy">Privacy</string>
     <string name="btn_logout">Logout</string>
+
+    <string name="txt_userPosted">TrashSlayer420 posted.</string>
+    <string name="btn_seePost">See post</string>
 </resources>

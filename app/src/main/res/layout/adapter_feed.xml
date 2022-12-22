@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardv_history"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_gray">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_gray">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.30" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/img_helper_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <LinearLayout
+            android:id="@+id/app_shape_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/app_shape_2"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+            app:layout_constraintTop_toTopOf="@+id/img_helper_3" />
+
+        <ImageView
+            android:id="@+id/img_feedPost"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/app_shape_round_outline"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+            app:layout_constraintDimensionRatio="1:"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+            app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+            app:layout_constraintTop_toTopOf="@+id/img_helper_3"
+            app:srcCompat="@drawable/img_feed_placeholder_1" />
+
+        <LinearLayout
+            android:id="@+id/app_shape_4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/app_shape_4"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+            app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+            app:layout_constraintTop_toTopOf="@+id/img_helper_5" />
+
+        <ImageView
+            android:id="@+id/img_userPosted_pic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/app_round_edges"
+            android:clipToOutline="true"
+            android:contentDescription="profile_pic"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
+            app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+            app:layout_constraintTop_toTopOf="@+id/img_helper_5"
+            app:srcCompat="@drawable/placeholder_profile2" />
+
+        <TextView
+            android:id="@+id/txt_userPosted"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/txt_userPosted"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+            app:layout_constraintStart_toStartOf="@+id/img_userPosted_pic"
+            app:layout_constraintTop_toTopOf="@+id/img_helper_5" />
+
+        <Button
+            android:id="@+id/btn_seePost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:selectableItemBackground"
+            android:text="@string/btn_seePost"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
+            app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+            app:layout_constraintTop_toBottomOf="@+id/txt_userPosted" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

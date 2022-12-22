@@ -270,60 +270,14 @@
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_10" />
 
-    <LinearLayout
-        android:id="@+id/app_shape_3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/app_shape_3"
-        android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_12"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
         app:layout_constraintTop_toTopOf="@+id/img_helper_11"
-        app:layout_constraintVertical_bias="0.0">
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/txt_history_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/placeholder_location"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_11" />
-
-    <LinearLayout
-        android:id="@+id/app_shape_4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/app_shape_3"
-        android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_14"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_13"
-        app:layout_constraintVertical_bias="0.0">
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/txt_history_location2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/placeholder_location"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_13" />
+        tools:itemCount="5"
+        tools:listitem="@layout/adapter_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

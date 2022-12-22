@@ -24,8 +24,8 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // final TextView textView = binding.textDashboard;
-        // dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // TODO: Don't forget to call the adapter and link it with the ui
+
         return root;
     }
 
