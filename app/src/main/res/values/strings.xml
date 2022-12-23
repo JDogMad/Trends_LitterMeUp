@@ -65,4 +65,10 @@
 
     <string name="txt_userPosted">TrashSlayer420 posted.</string>
     <string name="btn_seePost">See post</string>
+
+    <string name="title_newPost">New post</string>
+    <string name="subTitle_newPost">Post your findings</string>
+    <string name="post_title">Title</string>
+    <string name="post_description">Description</string>
+    <string name="btn_post">Post</string>
 </resources>

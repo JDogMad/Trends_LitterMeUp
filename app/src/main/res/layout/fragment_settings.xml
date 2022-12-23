@@ -327,6 +327,7 @@
         app:layout_constraintStart_toEndOf="@+id/app_ic_feedback"
         app:layout_constraintTop_toTopOf="@+id/img_helper_12" />
 
+    <!-- TODO: FUNCTIONALITY -->
     <Button
         android:id="@+id/btn_arrow_feedback"
         android:layout_width="0dp"
