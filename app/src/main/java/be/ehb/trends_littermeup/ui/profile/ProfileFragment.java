@@ -51,7 +51,9 @@ public class ProfileFragment extends Fragment {
         database.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                System.out.println(user.getPoints());
+                username.setText(user.getUsername());
+                points.setText(Integer.toString(user.getPoints()));
+                level.setText(Integer.toString(user.getUserLevel(user.getPoints())));
             }
         });
     }
