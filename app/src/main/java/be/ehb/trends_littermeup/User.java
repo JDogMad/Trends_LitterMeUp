@@ -5,15 +5,20 @@ import android.media.Image;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.firebase.firestore.Exclude;
 
 import java.util.List;
-@JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class User {
     private List<Integer> friendId;
     private String email, username;
     private int id, points;
     private double balance;
     private Image profilePicture;
+
+    public static int getCounter() {
+        return counter;
+    }
+
     static int counter = 1;
     private String uid;
 
@@ -115,7 +120,7 @@ public class User {
     public String getUid() {
         return uid;
     }
-
+    @Exclude
     public User getUser(){
         return this;
     }
