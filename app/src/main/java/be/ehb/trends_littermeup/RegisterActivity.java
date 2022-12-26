@@ -14,12 +14,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -61,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
         String username = txtUsername.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
+        Database database = new Database();
+
 
         if(email.isEmpty()){
             Toast.makeText(this, "Email field not filled in", Toast.LENGTH_SHORT).show();
@@ -81,7 +90,8 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
-                                //User newUser = new User(email,username,mAuth.getCurrentUser().getUid());
+                                User newUser = new User(email,username,mAuth.getCurrentUser().getUid());
+                                database.add(newUser);
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 showMainActivity();
                             } else {

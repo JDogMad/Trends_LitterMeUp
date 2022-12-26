@@ -48,4 +48,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
+
 }
