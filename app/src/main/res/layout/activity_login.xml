@@ -79,6 +79,7 @@
 
 
     <!-- This linearlayout is used for the white shape in de design -->
+
     <LinearLayout
         android:id="@+id/app_shape_1"
         android:layout_width="match_parent"
@@ -87,9 +88,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_3">
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/img_helper_3"></LinearLayout>
 
     <TextView
         android:id="@+id/app_welcome"
@@ -142,7 +143,7 @@
         app:layout_constraintWidth_percent="0.7" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/txt_login"
