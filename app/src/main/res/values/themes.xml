@@ -16,6 +16,12 @@
 
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/black</item>
+
+    </style>
+    <style name="NavigationViewStyle" parent="Widget.Design.NavigationView">
+        <item name="itemIconTint">@color/main_green</item>
+        <item name="itemTextColor">@color/main_green</item>
+        <item name="android:textColorPrimary">@color/main_green</item>
     </style>
 
     <style name="Theme.Trends_LitterMeUp.NoActionBar">

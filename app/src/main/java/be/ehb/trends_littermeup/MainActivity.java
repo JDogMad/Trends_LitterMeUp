@@ -1,34 +1,110 @@
 package be.ehb.trends_littermeup;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
 import be.ehb.trends_littermeup.ui.home.HomeFragment;
 import be.ehb.trends_littermeup.ui.maps.MapsFragment;
 import be.ehb.trends_littermeup.ui.profile.ProfileFragment;
-
-import android.view.MenuItem;
+import be.ehb.trends_littermeup.ui.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
     // Navigation view
     BottomNavigationView bottomNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavView;
+    private Toolbar mToolbar;
+    private Button mButton;
 
     // Fragments
     HomeFragment homeFragment = new HomeFragment();
     MapsFragment mapsFragment = new MapsFragment();
     ProfileFragment profileFragment = new ProfileFragment();
     DashboardFragment dashboardFragment = new DashboardFragment();
+    SettingsFragment settingsFragment = new SettingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mNavView = findViewById(R.id.navigation);
+        mToolbar = findViewById(R.id.toolbar);
+        mButton = findViewById(R.id.btn_nav);
+
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        mButton.setBackgroundResource(R.drawable.ic_menu_green_24dp);
+
+        // Hamburgermenu
+        // Set the item click listener
+        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Handle navigation item clicks here
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        // Replace the main content with the HomeFragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, new HomeFragment())
+                                .commit();
+                        break;
+                    case R.id.navigation_dashboard:
+                        // Replace the main content with the DashboardFragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, new DashboardFragment())
+                                .commit();
+                        break;
+                    case R.id.navigation_maps:
+                        // Replace the main content with the MapsFragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, new MapsFragment())
+                                .commit();
+                        break;
+                    case R.id.navigation_profile:
+                        // Replace the main content with the ProfileFragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, new ProfileFragment())
+                                .commit();
+                        break;
+                    case R.id.navigation_settings:
+                        // Replace the main content with the SettingsFragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, new SettingsFragment())
+                                .commit();
+                        break;
+                }
+                // Close the drawer
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
+
+        // Set the button click listener
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the hamburger menu
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.nav_view);

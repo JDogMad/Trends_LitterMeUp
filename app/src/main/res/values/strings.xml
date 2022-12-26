@@ -16,7 +16,7 @@
     <string name="app_question_register">Don\'t have an account?</string>
     <string name="app_question_login">Already have an account?</string>
 
-    <string name="title_home">Home</string>
+    <string name="title_home" translatable="false">Home</string>
     <string name="subTitle_home_username">Hi username</string>
     <string name="subTitle_home">Welcome back</string>
     <string name="title_littercash">LitterCash</string>
@@ -29,16 +29,16 @@
     <string name="placeholder_contributionsInDays">X day(s)</string>
     <string name="placeholder_contributionInHours">X hour(s)</string>
 
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="subTitle_dashboard">See where you can help.</string>
     <string name="subTitle_camera">Start reporting trash on the street</string>
     <string name="subTitle_openCamera">Open camera</string>
     <string name="small_trash">Small trash</string>
     <string name="big_trash">Big trash</string>
-    <string name="subTitle_feed">Feed</string>
+    <string name="subTitle_feed" translatable="false">Feed</string>
 
 
-    <string name="title_maps">Maps</string>
+    <string name="title_maps" translatable="false">Maps</string>
     <string name="subTitle_maps">Save the world, by starting locally</string>
 
     <string name="title_profile">Profile</string>
@@ -70,5 +70,7 @@
     <string name="subTitle_newPost">Post your findings</string>
     <string name="post_title">Title</string>
     <string name="post_description">Description</string>
-    <string name="btn_post">Post</string>
+    <string name="btn_post" translatable="false">Post</string>
+
+
 </resources>

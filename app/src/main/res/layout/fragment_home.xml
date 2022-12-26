@@ -129,18 +129,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.90" />
 
-    <Button
-        android:id="@+id/btn_nav"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ic_menu_green_24dp"
-        app:backgroundTint="@color/green_1"
-        app:itemIconTint="@color/main_green"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_9"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/app_location"
         android:layout_width="0dp"

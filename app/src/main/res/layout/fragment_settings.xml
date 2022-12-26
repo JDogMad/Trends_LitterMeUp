@@ -152,6 +152,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.78" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
     <TextView
         android:id="@+id/app_settings_sub"
         android:layout_width="0dp"
@@ -276,16 +283,17 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_10"
         app:srcCompat="@drawable/ic_green_nightmode_blank" />
 
-    <TextView
+    <Button
         android:id="@+id/title_nightmode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_nightmode"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        android:background="?android:selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_nightmode"
         app:layout_constraintTop_toTopOf="@+id/img_helper_9" />
 
@@ -353,16 +361,17 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_15"
         app:srcCompat="@drawable/ic_green_terms_conditions" />
 
-    <TextView
+    <Button
         android:id="@+id/title_terms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
+        android:background="?android:selectableItemBackground"
         android:text="@string/title_terms"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_15"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_terms"
         app:layout_constraintTop_toTopOf="@+id/img_helper_14" />
 
@@ -379,16 +388,17 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_17"
         app:srcCompat="@drawable/ic_green_privacy" />
 
-    <TextView
+    <Button
         android:id="@+id/title_privacy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_privacy"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:background="?android:selectableItemBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_17"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_privacy"
         app:layout_constraintTop_toTopOf="@+id/img_helper_16" />
 
@@ -406,16 +416,17 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_19"
         app:srcCompat="@drawable/ic_green_logout_15dp" />
 
-    <TextView
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/btn_logout"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        android:background="?android:selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_19"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_logout"
         app:layout_constraintTop_toTopOf="@+id/img_helper_18" />
 </androidx.constraintlayout.widget.ConstraintLayout>

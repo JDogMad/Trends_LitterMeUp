@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardv_history"
+    android:id="@+id/cardv_friends"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_gray">
@@ -79,6 +79,8 @@
             android:layout_height="0dp"
             android:scaleType="centerInside"
             app:layout_constraintDimensionRatio="2:3"
+            android:background="@drawable/app_shape_round_outline"
+            android:clipToOutline="true"
             app:layout_constraintBottom_toBottomOf="@+id/img_helper_5"
             app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
             app:layout_constraintStart_toStartOf="@+id/img_helper_1"
