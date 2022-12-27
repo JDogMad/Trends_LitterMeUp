@@ -182,6 +182,8 @@
         app:layout_constraintTop_toTopOf="@+id/img_helper_3"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1" />
 
+    <!-- TODO: FUNCTIONALITY -->
+
     <ImageView
         android:id="@+id/app_ic_language"
         android:layout_width="0dp"
@@ -194,16 +196,15 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_6"
         app:srcCompat="@drawable/ic_languages_green_15dp" />
 
-    <TextView
-        android:id="@+id/title_language"
+    <Button
+        android:id="@+id/btn_languages"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_languages"
+        android:background="?android:selectableItemBackground"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/app_ic_language"
         app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
@@ -217,19 +218,7 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/title_language"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
-
-    <Button
-        android:id="@+id/btn_arrow_language"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_green_next"
-        android:scaleType="center"
-        app:backgroundTint="@color/green_1"
-        app:layout_constraintBottom_toBottomOf="@id/img_helper_6"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+        app:layout_constraintStart_toEndOf="@+id/btn_languages"
         app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
 
@@ -245,29 +234,16 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_8"
         app:srcCompat="@drawable/ic_badge_green" />
 
-    <TextView
-        android:id="@+id/title_achievements"
+    <Button
+        android:id="@+id/btn_achievements"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_achievements"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="10sp"
+        android:background="?android:selectableItemBackground"
         app:layout_constraintStart_toEndOf="@+id/app_ic_achievements"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
-
-    <Button
-        android:id="@+id/btn_arrow_achievement"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_green_next"
-        android:scaleType="center"
-        app:backgroundTint="@color/green_1"
-        app:layout_constraintBottom_toBottomOf="@id/img_helper_8"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
 
 
@@ -290,7 +266,7 @@
         android:text="@string/title_nightmode"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:background="?android:selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
@@ -322,30 +298,16 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_13"
         app:srcCompat="@drawable/ic_green_feedback" />
 
-    <TextView
-        android:id="@+id/title_feedback"
+    <Button
+        android:id="@+id/btn_feedback"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="10dp"
         android:text="@string/title_feedback"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="10sp"
+        android:background="?android:selectableItemBackground"
         app:layout_constraintStart_toEndOf="@+id/app_ic_feedback"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_12" />
-
-    <!-- TODO: FUNCTIONALITY -->
-    <Button
-        android:id="@+id/btn_arrow_feedback"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_green_next"
-        android:scaleType="center"
-        app:backgroundTint="@color/green_1"
-        app:layout_constraintBottom_toBottomOf="@id/img_helper_13"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintTop_toTopOf="@+id/img_helper_12" />
 
 
@@ -362,14 +324,14 @@
         app:srcCompat="@drawable/ic_green_terms_conditions" />
 
     <Button
-        android:id="@+id/title_terms"
+        android:id="@+id/btn_terms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:text="@string/title_terms"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_15"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_terms"
@@ -389,14 +351,14 @@
         app:srcCompat="@drawable/ic_green_privacy" />
 
     <Button
-        android:id="@+id/title_privacy"
+        android:id="@+id/btn_privacy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/title_privacy"
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:background="?android:selectableItemBackground"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_17"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_20"
         app:layout_constraintStart_toEndOf="@+id/app_ic_privacy"
@@ -416,6 +378,7 @@
         app:layout_constraintBottom_toBottomOf="@id/img_helper_19"
         app:srcCompat="@drawable/ic_green_logout_15dp" />
 
+
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="0dp"
@@ -423,7 +386,7 @@
         android:text="@string/btn_logout"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:background="?android:selectableItemBackground"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_19"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_20"

@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(false);
         mButton.setBackgroundResource(R.drawable.ic_menu_green_24dp);
 
@@ -63,31 +64,31 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_home:
                         // Replace the main content with the HomeFragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, new HomeFragment())
+                                .replace(R.id.container, homeFragment)
                                 .commit();
                         break;
                     case R.id.navigation_dashboard:
                         // Replace the main content with the DashboardFragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, new DashboardFragment())
+                                .replace(R.id.container, dashboardFragment)
                                 .commit();
                         break;
                     case R.id.navigation_maps:
                         // Replace the main content with the MapsFragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, new MapsFragment())
+                                .replace(R.id.container, mapsFragment)
                                 .commit();
                         break;
                     case R.id.navigation_profile:
                         // Replace the main content with the ProfileFragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, new ProfileFragment())
+                                .replace(R.id.container, profileFragment)
                                 .commit();
                         break;
                     case R.id.navigation_settings:
                         // Replace the main content with the SettingsFragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, new SettingsFragment())
+                                .replace(R.id.container, settingsFragment)
                                 .commit();
                         break;
                 }
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
 
         //Bottom navigation
         bottomNavigationView = findViewById(R.id.nav_view);
