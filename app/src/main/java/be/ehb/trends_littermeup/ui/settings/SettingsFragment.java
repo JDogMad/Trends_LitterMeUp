@@ -1,7 +1,9 @@
 package be.ehb.trends_littermeup.ui.settings;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,19 +13,13 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.review.model.ReviewErrorCode;
+import java.util.Locale;
 
 import be.ehb.trends_littermeup.R;
-import be.ehb.trends_littermeup.databinding.FragmentProfileBinding;
 import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
-import be.ehb.trends_littermeup.ui.home.HomeViewModel;
 
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
@@ -31,6 +27,9 @@ public class SettingsFragment extends Fragment {
     Button termsAndConditions;
     Button privacy;
     Button feedback;
+    Button selected_language;
+
+    String[] languageCodes = {"en", "nl", "fr"};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +76,31 @@ public class SettingsFragment extends Fragment {
             }
         });*/
 
+        selected_language = root.findViewById(R.id.btn_languages);
+        selected_language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the names of the supported languages
+                String[] languageNames = getResources().getStringArray(R.array.language_names);
+
+                // Create the dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.select_language)
+                        .setItems(languageNames, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Get the selected language code
+                                String languageCode = languageCodes[which];
+
+                                // Set the app language to the selected language
+                                setLocale(languageCode);
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
         return root;
     }
 
@@ -84,5 +108,22 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getContext().getResources().updateConfiguration(config,
+                getContext().getResources().getDisplayMetrics());
+
+        // Refresh the fragment to apply the language change
+        FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new SettingsFragment())
+                    .commit();
+        }
     }
 }

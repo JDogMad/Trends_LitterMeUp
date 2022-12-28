@@ -105,6 +105,11 @@
     <string name="btn_post" translatable="false">Post</string>
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
-
+    <string name="titleapp_languages">Languages</string>
+    <string name="subTitle_languages">Choose your preferred language</string>
+    <string name="english">English</string>
+    <string name="dutch_BE">Dutch (Belgium)</string>
+    <string name="french_BE">French (Belgium)</string>
+    <string name="select_language">Select Language</string>
 
 </resources>

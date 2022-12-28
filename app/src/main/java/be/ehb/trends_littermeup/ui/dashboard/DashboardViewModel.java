@@ -1,19 +1,27 @@
 package be.ehb.trends_littermeup.ui.dashboard;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-    private final MutableLiveData<String> mText;
+public class DashboardViewModel extends AndroidViewModel {
+    private ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-    public DashboardViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+    public DashboardViewModel(@NonNull Application application) {
+        super(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+    // Voorbeeld
+    /*public LiveData<List<Posts>> getAllNotes(){
+        // Hier komt u get posts shit
+        return noteDataBass.getNoteDAO().getAllNotes();
+    }*/
 }
