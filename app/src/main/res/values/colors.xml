@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main_gray">#C7CECE</color>
-
+    <color name="error_red">#CEFF0000</color>
     <color name="main_green">#661D884B</color>
     <color name="green_1">#DD1D884B</color>
     <color name="green">#1D884B</color>
