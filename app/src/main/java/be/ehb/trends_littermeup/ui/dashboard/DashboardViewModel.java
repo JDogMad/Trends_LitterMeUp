@@ -13,8 +13,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class DashboardViewModel extends AndroidViewModel {
-    private ExecutorService executorService = Executors.newFixedThreadPool(2);
-
     public DashboardViewModel(@NonNull Application application) {
         super(application);
     }
