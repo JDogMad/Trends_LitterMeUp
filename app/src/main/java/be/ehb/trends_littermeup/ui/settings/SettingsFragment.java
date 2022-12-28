@@ -1,5 +1,6 @@
 package be.ehb.trends_littermeup.ui.settings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.review.model.ReviewErrorCode;
+
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentProfileBinding;
 import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
@@ -23,6 +30,7 @@ public class SettingsFragment extends Fragment {
 
     Button termsAndConditions;
     Button privacy;
+    Button feedback;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +68,14 @@ public class SettingsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        /*feedback = root.findViewById(R.id.btn_feedback);
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
 
         return root;
     }
