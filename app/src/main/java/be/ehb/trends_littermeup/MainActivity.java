@@ -48,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btnLogout = findViewById(R.id.btn_Logout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutUser();
-            }
-        });
-
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavView = findViewById(R.id.navigation);
@@ -147,10 +139,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void logoutUser(){
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

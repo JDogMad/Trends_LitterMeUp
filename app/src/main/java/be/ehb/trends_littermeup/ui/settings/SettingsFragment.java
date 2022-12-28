@@ -16,8 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Locale;
 
+import be.ehb.trends_littermeup.LoginActivity;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
 
@@ -35,6 +38,13 @@ public class SettingsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        Button btnLogout = root.findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutUser();
+            }
+        });
 
         termsAndConditions = root.findViewById(R.id.btn_terms);
         termsAndConditions.setOnClickListener(new View.OnClickListener() {
@@ -125,5 +135,11 @@ public class SettingsFragment extends Fragment {
                     .replace(R.id.container, new SettingsFragment())
                     .commit();
         }
+    }
+
+    private void logoutUser(){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
     }
 }
