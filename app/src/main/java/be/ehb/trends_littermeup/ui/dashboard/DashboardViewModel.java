@@ -19,9 +19,12 @@ public class DashboardViewModel extends AndroidViewModel {
         super(application);
     }
 
+
+
     // Voorbeeld
     /*public LiveData<List<Posts>> getAllNotes(){
         // Hier komt u get posts shit
         return noteDataBass.getNoteDAO().getAllNotes();
     }*/
+
 }

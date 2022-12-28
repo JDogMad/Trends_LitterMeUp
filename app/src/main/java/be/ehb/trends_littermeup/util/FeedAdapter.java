@@ -8,9 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
+
+import be.ehb.trends_littermeup.Database;
+import be.ehb.trends_littermeup.Post;
+import be.ehb.trends_littermeup.R;
+import be.ehb.trends_littermeup.User;
 import java.util.ArrayList;
+
 
 import be.ehb.trends_littermeup.R;
 
@@ -32,6 +43,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
             img_userPosted = itemView.findViewById(R.id.img_userPosted_pic);
         }
     }
+
 
     // Hier moet je niks doen
     @NonNull

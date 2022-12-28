@@ -11,12 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
+import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentDashboardBinding;
 import be.ehb.trends_littermeup.ui.feed.NewPostFragment;
+import be.ehb.trends_littermeup.util.FeedAdapter;
 
 public class DashboardFragment extends Fragment {
 
@@ -54,8 +60,21 @@ public class DashboardFragment extends Fragment {
 
 
         // TODO: Don't forget to call the adapter and link it with the ui
+//        NoteViewModel viewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
+//        FeedAdapter noteAdapter = new FeedAdapter();
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+//
+//        binding.rcFeedPosts.setAdapter(noteAdapter);
+//        binding.rcFeedPosts.setLayoutManager(layoutManager);
+//        viewModel.getAllPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+//            @Override
+//            public void onChanged(List<Post> notes) {
+//                noteAdapter.addItems(notes);
+//            }
+//        });
         return root;
     }
+
 
     @Override
     public void onDestroyView() {
