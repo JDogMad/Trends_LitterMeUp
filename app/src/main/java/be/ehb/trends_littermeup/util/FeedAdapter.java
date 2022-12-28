@@ -8,15 +8,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
+
+import be.ehb.trends_littermeup.Database;
+import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
+import be.ehb.trends_littermeup.User;
 
 // TODO: THE BINDING WITH THE DATBASE
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     // private List<YourModel> modelList;
     private Context context;
+    private Database db = new Database();
 
     @NonNull
     @Override
@@ -27,6 +36,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         // This needs to get the data from the database
         // Something like
         /* YourModel model = modelList.get(position);

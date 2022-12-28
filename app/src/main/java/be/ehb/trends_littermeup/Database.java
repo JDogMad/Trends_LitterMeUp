@@ -22,7 +22,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,17 +50,21 @@ public class Database {
         return db.collection("Posts").document(Integer.toString(post.getId())).set(post);
     }
 
-    public MutableLiveData<List<Post>> getAllPosts(){
+    public MutableLiveData<List<Post>> getAllPostsDB(){
         MutableLiveData<List<Post>> posts = new MutableLiveData<>();
         CollectionReference postsRef = db.collection("Posts");
         postsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                
+                List<Post> postList = new ArrayList<>();
+                for (DocumentSnapshot documentSnapchot: queryDocumentSnapshots.getDocuments()) {
+                    Post post = documentSnapchot.toObject(Post.class);
+                    postList.add(post);
+                }
+                posts.setValue(postList);
             }
-        })
-        DocumentReference documentReference = db.collection("Posts").document()
-
+        });
+        return posts;
     }
 
 
