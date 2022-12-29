@@ -2,25 +2,34 @@ package be.ehb.trends_littermeup;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class Post {
     private Bitmap bitmap;
     private int id;
     private String titel;
     private String description;
-    private static int counter = 1;
+
     private String nameFile;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public Post() {
     }
 
-    public Post(Bitmap bitmap, String titel, String description) {
+    public Post(Bitmap bitmap, String titel, String description,int id) {
         this.bitmap = bitmap;
         this.titel = titel;
         this.description = description;
-        this.id = counter;
-        counter++;
+        this.id = id;
+
     }
 
     @Exclude
@@ -54,10 +63,6 @@ public class Post {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public static int getCounter() {
-        return counter;
     }
 
     public String getNameFile() {

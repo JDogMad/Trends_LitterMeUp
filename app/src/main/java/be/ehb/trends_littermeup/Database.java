@@ -47,7 +47,7 @@ public class Database {
         File myDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "saved_images");
         File file = new File(myDir, imageName);
         storage.getReference(imageName).putFile(Uri.fromFile(file));
-        return db.collection("Posts").document(Integer.toString(post.getId())).set(post);
+        return db.collection("Posts").document().set(post);
     }
 
     public MutableLiveData<List<Post>> getAllPostsDB(){

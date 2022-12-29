@@ -26,7 +26,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.api.Context;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,12 +49,14 @@ public class NewPostFragment extends Fragment {
     private FragmentNewpostBinding binding;
     private Bitmap bitmap;
     private Database db = new Database();
+    private int size;
+    private FirebaseFirestore fDb = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        getSizeOfFB();
         NewPostViewModel newPostViewModel =
                 new ViewModelProvider(this).get(NewPostViewModel.class);
-
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Button addPic = root.findViewById(R.id.btn_addPic);
@@ -68,8 +75,10 @@ public class NewPostFragment extends Fragment {
         newPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(!(titlePost.getText().toString().isEmpty()) && !(titlePost.getText().toString().isEmpty()) && bitmap != null){
-                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString());
+                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(),size);
+                    size++;
                     post.setNameFile("Image-" + post.getId() + ".jpg");
                     savePicture(post);
                     db.add(post);
@@ -140,5 +149,18 @@ public class NewPostFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void getSizeOfFB(){
+        CollectionReference collectionRef = fDb.collection("Posts");
+        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot snapshot = task.getResult();
+                    size = snapshot.size();
+                }
+            }
+        });
     }
 }
