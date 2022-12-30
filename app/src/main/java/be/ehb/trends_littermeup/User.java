@@ -11,7 +11,7 @@ import java.util.List;
 public class User {
     private List<Integer> friendId;
     private String email, username;
-    private int id, points;
+    private int points;
     private double balance;
     private Image profilePicture;
 
@@ -19,7 +19,6 @@ public class User {
         return counter;
     }
 
-    static int counter = 1;
     private String uid;
 
 
@@ -31,10 +30,8 @@ public class User {
         this.uid = uid;
         this.points = 0;
         this.balance = 0;
-        this.id = counter;
         this.email = email;
         this.username = username;
-        counter++;
     }
 
 
@@ -46,7 +43,6 @@ public class User {
                 "friendId=" + friendId +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", id=" + id +
                 ", points=" + points +
                 ", balance=" + balance +
                 ", profilePicture=" + profilePicture +
