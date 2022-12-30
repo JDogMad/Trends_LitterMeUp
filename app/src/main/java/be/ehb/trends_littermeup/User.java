@@ -15,10 +15,6 @@ public class User {
     private double balance;
     private Image profilePicture;
 
-    public static int getCounter() {
-        return counter;
-    }
-
     private String uid;
 
 
@@ -79,14 +75,6 @@ public class User {
 
     public void setFriendId(List<Integer> friendId) {
         this.friendId = friendId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getPoints() {
