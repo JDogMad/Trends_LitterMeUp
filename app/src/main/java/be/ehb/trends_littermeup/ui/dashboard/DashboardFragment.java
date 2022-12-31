@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +26,6 @@ import be.ehb.trends_littermeup.ui.feed.NewPostFragment;
 import be.ehb.trends_littermeup.util.FeedAdapter;
 
 public class DashboardFragment extends Fragment {
-
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,20 +58,18 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        DashboardViewModel viewModel = new ViewModelProvider(getActivity()).get(DashboardViewModel.class);
+        FeedAdapter feedAdapter = new FeedAdapter();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        binding.rcFeedPosts.setAdapter(feedAdapter);
+        binding.rcFeedPosts.setLayoutManager(layoutManager);
+        viewModel.getAllPostsDB().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                    feedAdapter.addItems(posts);
+                }
+        });
 
-        // TODO: Don't forget to call the adapter and link it with the ui
-//        NoteViewModel viewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
-//        FeedAdapter noteAdapter = new FeedAdapter();
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-//
-//        binding.rcFeedPosts.setAdapter(noteAdapter);
-//        binding.rcFeedPosts.setLayoutManager(layoutManager);
-//        viewModel.getAllPosts().observe(getViewLifecycleOwner(), new Observer<List<Post>>() {
-//            @Override
-//            public void onChanged(List<Post> notes) {
-//                noteAdapter.addItems(notes);
-//            }
-//        });
         return root;
     }
 

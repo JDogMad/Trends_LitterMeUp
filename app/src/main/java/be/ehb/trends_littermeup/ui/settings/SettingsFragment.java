@@ -5,17 +5,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import be.ehb.trends_littermeup.R;
@@ -28,11 +38,13 @@ public class SettingsFragment extends Fragment {
     Button privacy;
     Button feedback;
     Button selected_language;
+    TextView selectedLanguage;
 
     String[] languageCodes = {"en", "nl", "fr"};
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -75,6 +87,7 @@ public class SettingsFragment extends Fragment {
 
             }
         });*/
+        selectedLanguage = root.findViewById(R.id.txt_selectedLanguage);
 
         selected_language = root.findViewById(R.id.btn_languages);
         selected_language.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +104,7 @@ public class SettingsFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Get the selected language code
                                 String languageCode = languageCodes[which];
+                                selectedLanguage.setText(languageCode);
 
                                 // Set the app language to the selected language
                                 setLocale(languageCode);
@@ -126,4 +140,5 @@ public class SettingsFragment extends Fragment {
                     .commit();
         }
     }
+
 }

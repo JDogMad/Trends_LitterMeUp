@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,6 +39,7 @@ import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentNewpostBinding;
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
+import be.ehb.trends_littermeup.ui.settings.SettingsFragment;
 
 public class NewPostFragment extends Fragment {
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -73,15 +75,29 @@ public class NewPostFragment extends Fragment {
                     post.setNameFile("Image-" + post.getId() + ".jpg");
                     savePicture(post);
                     db.add(post);
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    if (fragmentManager != null) {
+                        Button button1 = getView().findViewById(R.id.btn_addPic);
+                        Button button2 = getView().findViewById(R.id.btn_post);
+
+                        button1.setVisibility(View.GONE);
+                        button2.setVisibility(View.GONE);
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.const_newpost, new DashboardFragment())
+                                .commit();
+
+
+                    }
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
                         int redColorValue = Color.RED;
-                        titlePost.setBackgroundColor(redColorValue);
+                        titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));
                     }
                     if(descriptionPost.getText().toString().isEmpty()){
                         int redColorValue = Color.RED;
-                        descriptionPost.setBackgroundColor(redColorValue);
+                        descriptionPost.setBackground(getResources().getDrawable(R.drawable.app_shape_5_error));
                     }
                     if(bitmap == null){
                         Toast.makeText(getActivity(), "No Picture included", Toast.LENGTH_SHORT).show();
@@ -107,7 +123,6 @@ public class NewPostFragment extends Fragment {
             bitmap = imageBitmap;
         }
     }
-
 
 
     public void savePicture(Post post) {

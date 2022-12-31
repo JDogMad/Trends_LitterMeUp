@@ -1,15 +1,26 @@
 package be.ehb.trends_littermeup;
 
+import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firestore.v1.WriteResponse;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,6 +37,8 @@ import be.ehb.trends_littermeup.ui.profile.ProfileFragment;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import be.ehb.trends_littermeup.ui.settings.SettingsFragment;
 
 
@@ -48,14 +61,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btnLogout = findViewById(R.id.btn_Logout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutUser();
-            }
-        });
-
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavView = findViewById(R.id.navigation);
@@ -145,12 +150,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
+
+
     private void logoutUser(){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();
     }
+
 }
