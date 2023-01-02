@@ -96,6 +96,8 @@
 
 
     <string name="txt_postTitle">TrashSlayer420 posted.</string>
+    <string name="txt_userPosted">User</string>
+    <string name="subTitle_languages">Languages</string>
     <string name="btn_seePost">See post</string>
     <string name="txt_postDescription">Description</string>
 
@@ -107,15 +109,22 @@
     <string name="navigation_drawer_open">Open navigation</string>
     <string name="navigation_drawer_close">Close navigation</string>
     <string name="titleapp_languages">Languages</string>
-    <string name="subTitle_languages">Choose your preferred language</string>
-    <string name="english">English</string>
-    <string name="dutch_BE">Dutch (Belgium)</string>
-    <string name="french_BE">French (Belgium)</string>
-    <string name="select_language">Select Language</string>
 
+    <string name="english">English</string>
+    <string name="dutch_BE">Dutch</string>
+    <string name="french_BE">French</string>
 
     <string name="btn_redeem_5">Redeem your coupon</string>
+    <string name="redeem_5">Redeem €5</string>
+    <string name="redeem_description">Redeem your coupon here and check you email,
+    you\'ll get you code. Now you can enjoy it pretty much anywhere.</string>
+    <string name="enjoy">Enjoy your coupon</string>
     <string name="btn_redeem_50">Redeem your coupon</string>
+    <string name="redeem_50">Redeem €50</string>
     <string name="btn_redeem_100">Redeem your coupon</string>
+    <string name="redeem_100">Redeem €100</string>
+
+
+    <string name="select_language">Choose your language</string>
 
 </resources>

@@ -25,20 +25,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
 import java.util.Locale;
 
+import be.ehb.trends_littermeup.LoginActivity;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
 
-    Button termsAndConditions;
-    Button privacy;
-    Button feedback;
-    Button selected_language;
-    TextView selectedLanguage;
+    Button termsAndConditions, privacy, feedback, selected_language, logout;
+    String languageCode;
 
     String[] languageCodes = {"en", "nl", "fr"};
 
@@ -80,14 +80,24 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        /*feedback = root.findViewById(R.id.btn_feedback);
+
+        feedback = root.findViewById(R.id.btn_feedback);
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Create the email intent
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"help@littermeup.com"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello,\n\nI would like to give the following feedback:\n\n");
 
+                // Create a chooser dialog to allow the user to choose an email client
+                startActivity(Intent.createChooser(emailIntent, "Send feedback using:"));
             }
-        });*/
-        selectedLanguage = root.findViewById(R.id.txt_selectedLanguage);
+        });
+
+
 
         selected_language = root.findViewById(R.id.btn_languages);
         selected_language.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +113,8 @@ public class SettingsFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Get the selected language code
-                                String languageCode = languageCodes[which];
-                                selectedLanguage.setText(languageCode);
+                                languageCode = languageCodes[which];
+                                System.out.println(languageCode);
 
                                 // Set the app language to the selected language
                                 setLocale(languageCode);
@@ -112,6 +122,14 @@ public class SettingsFragment extends Fragment {
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+
+        logout = root.findViewById(R.id.btn_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutUser();
             }
         });
 
@@ -141,4 +159,9 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    private void logoutUser(){
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+    }
 }

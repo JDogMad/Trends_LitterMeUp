@@ -87,8 +87,6 @@ public class NewPostFragment extends Fragment {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.const_newpost, new DashboardFragment())
                                 .commit();
-
-
                     }
                 }else{
                     if(titlePost.getText().toString().isEmpty()){

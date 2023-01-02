@@ -45,10 +45,4 @@ public class DashboardViewModel extends AndroidViewModel {
         return posts;
     }
 
-    // Voorbeeld
-    /*public LiveData<List<Posts>> getAllNotes(){
-        // Hier komt u get posts shit
-        return noteDataBass.getNoteDAO().getAllNotes();
-    }*/
-
 }

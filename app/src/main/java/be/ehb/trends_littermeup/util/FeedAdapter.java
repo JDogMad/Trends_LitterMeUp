@@ -37,7 +37,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    // Hier moet je niks doen
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_postTitle, txt_postDescription;
         ImageView img_userPosted, img_feedPost;

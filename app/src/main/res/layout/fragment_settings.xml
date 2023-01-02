@@ -209,19 +209,6 @@
         app:layout_constraintStart_toEndOf="@+id/app_ic_language"
         app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
-    <TextView
-        android:id="@+id/txt_selectedLanguage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/placeholder_language"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_languages"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
-
 
     <ImageView
         android:id="@+id/app_ic_achievements"
