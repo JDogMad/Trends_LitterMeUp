@@ -79,4 +79,10 @@ public class Database {
         });
     return user;
     }
+
+    public Task<Void> changePointsOnUser(int punten, User user){
+        DocumentReference documentReference = db.collection("Users").document(user.getUid());
+        user.setPoints(punten);
+        return documentReference.set(user);
+    }
 }

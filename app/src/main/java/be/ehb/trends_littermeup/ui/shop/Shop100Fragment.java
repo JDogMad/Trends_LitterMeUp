@@ -15,8 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -49,7 +52,7 @@ import be.ehb.trends_littermeup.ui.profile.ProfileFragment;
 
 public class Shop100Fragment extends Fragment {
     private FragmentShopValue100Binding binding;
-
+    Database db = new Database();
     Button btn_back, btn_redeem;
     String username, email;
     int points;
@@ -172,8 +175,14 @@ public class Shop100Fragment extends Fragment {
 
 
                         //TODO: REDUCE THE POINTS IN DATABASE
-                        points = points - 500;
-
+                        points = points - 10000;
+                        User user = new User();
+                        db.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
+                            @Override
+                            public void onChanged(User user) {
+                             db.changePointsOnUser(points, user);
+                            }
+                        });
                         System.out.println("Email sent");
 
                     } catch (MessagingException | IOException e) {

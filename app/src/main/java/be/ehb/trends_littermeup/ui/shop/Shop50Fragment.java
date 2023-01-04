@@ -49,7 +49,7 @@ import be.ehb.trends_littermeup.ui.profile.ProfileFragment;
 
 public class Shop50Fragment extends Fragment {
     private FragmentShopValue50Binding binding;
-
+    Database db = new Database();
     Button btn_back, btn_redeem;
     String email, username;
     int points;
@@ -172,8 +172,13 @@ public class Shop50Fragment extends Fragment {
 
 
                         //TODO: REDUCE THE POINTS IN DATABASE
-                        points = points - 500;
-
+                        points = points - 5000;
+                        db.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
+                            @Override
+                            public void onChanged(User user) {
+                                db.changePointsOnUser(points, user);
+                            }
+                        });
                         System.out.println("Email sent");
 
                     } catch (MessagingException | IOException e) {
