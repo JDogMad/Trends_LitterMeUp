@@ -30,7 +30,7 @@ import be.ehb.trends_littermeup.ui.shop.Shop5Fragment;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
-    private Button btn_coupon_5, btn_coupon_50, btn_coupon_100;
+    private Button btn_coupon_5, btn_coupon_50, btn_coupon_100, btn_addFriends;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -111,6 +111,26 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        btn_addFriends = root.findViewById(R.id.btn_moreFriends);
+        btn_addFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.const_profile, new FriendsFragment());
+
+                Button button1 = getView().findViewById(R.id.btn_coupon_5);
+                Button button2 = getView().findViewById(R.id.btn_coupon_50);
+                Button button3 = getView().findViewById(R.id.btn_coupon_100);
+                TextView button4 = getView().findViewById(R.id.btn_moreFriends);
+
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+                button3.setVisibility(View.GONE);
+                button4.setVisibility(View.GONE);
+
+                fragmentTransaction.commit();
+            }
+        });
 
         return root;
     }

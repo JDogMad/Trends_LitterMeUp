@@ -68,7 +68,6 @@ public class Database {
     }
 
 
-
     public MutableLiveData<User> getUserFromDbByUid(String uid){
         MutableLiveData<User> user = new MutableLiveData<>();
         DocumentReference documentReference = db.collection("Users").document(uid);

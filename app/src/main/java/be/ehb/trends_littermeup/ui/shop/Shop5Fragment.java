@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,7 +151,10 @@ public class Shop5Fragment extends Fragment {
                         message.setFrom(new InternetAddress("help.littermeup@gmail.com"));
                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
                         message.setSubject("Coupon Redemption");
-                        message.setText("Hi " + username + "\n\nYour coupon has been redeemed. Please show the following barcode at the store:\n\n");
+
+                        // Create a MimeBodyPart for the message text
+                        MimeBodyPart messageBodyPart = new MimeBodyPart();
+                        messageBodyPart.setText("Hi " + username + "\n\nYour 10 euro's coupon has been redeemed. Please show the following barcode at the store:\n\n");
 
                         // attach the barcode image
                         MimeBodyPart imagePart = new MimeBodyPart();
@@ -159,9 +163,10 @@ public class Shop5Fragment extends Fragment {
                         imagePart.attachFile(barcodeFile);
 
                         Multipart multipart = new MimeMultipart();
+                        multipart.addBodyPart(messageBodyPart);
                         multipart.addBodyPart(imagePart);
-
                         message.setContent(multipart);
+
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -173,8 +178,9 @@ public class Shop5Fragment extends Fragment {
                             }
                         }).start();
 
-
                         //TODO: REDUCE THE POINTS IN DATABASE
+                        points = points - 500;
+
 
                         System.out.println("Email sent");
 
@@ -182,6 +188,24 @@ public class Shop5Fragment extends Fragment {
                         throw new RuntimeException(e);
                     }
 
+
+                    TextView couponStatusTextView = root.findViewById(R.id.coupon_succes);
+                    String couponRedeemedText = "Your coupon has been redeemed. Be sure to check your mail, if anything went wrong please contact us at help.littermeup@gmail.com";
+                    couponStatusTextView.setText(couponRedeemedText);
+
+                    // create a CountDownTimer that counts down for 5 seconds
+                    CountDownTimer timer = new CountDownTimer(5000, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            // do nothing, just let the timer count down
+                        }
+                        public void onFinish() {
+                            // Hide textview
+                            couponStatusTextView.setVisibility(View.GONE);
+                        }
+                    };
+
+                    // start the timer
+                    timer.start();
                 } else {
                     Toast.makeText(getContext(), "You do not have enough points!", Toast.LENGTH_LONG).show();
                 }

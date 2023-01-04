@@ -110,7 +110,6 @@ public class NewPostFragment extends Fragment {
     public void takeAndSavePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
-
     }
 
     @Override
