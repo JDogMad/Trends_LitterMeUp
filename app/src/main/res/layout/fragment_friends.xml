@@ -50,36 +50,41 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.15" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
     <EditText
         android:id="@+id/txt_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/app_shape_5"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_4"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_6"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_3"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_4"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_gray_searchbar_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_4"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_6"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_5"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_3" />
+        app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
-    <TextView
-        android:id="@+id/txt_friend_username"
+    <ListView
+        android:id="@+id/listv_search_friends"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_5"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_6" />
-
-
+        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

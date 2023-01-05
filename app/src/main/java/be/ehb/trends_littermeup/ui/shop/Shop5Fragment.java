@@ -179,12 +179,16 @@ public class Shop5Fragment extends Fragment {
                         }).start();
 
                         points = points - 500;
+<<<<<<< Updated upstream
                         db.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
                             @Override
                             public void onChanged(User user) {
                                 db.changePointsOnUser(points, user);
                             }
                         });
+=======
+
+>>>>>>> Stashed changes
                         System.out.println("Email sent");
 
                     } catch (MessagingException | IOException e) {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +19,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.User;
 import be.ehb.trends_littermeup.databinding.FragmentFriendsBinding;
 import be.ehb.trends_littermeup.databinding.FragmentProfileBinding;
+import be.ehb.trends_littermeup.util.FriendsListAdapter;
 
 public class FriendsFragment extends Fragment {
     private FragmentFriendsBinding binding;
@@ -44,6 +49,7 @@ public class FriendsFragment extends Fragment {
         txt_addFriends.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                //Checks if the done button/search button has been clicked
                 if (i == EditorInfo.IME_ACTION_SEARCH || i == EditorInfo.IME_ACTION_DONE) {
                     // Perform the search
                     String query = textView.getText().toString();
@@ -63,14 +69,24 @@ public class FriendsFragment extends Fragment {
         }
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference usersRef = db.collection("users");
+        CollectionReference usersRef = db.collection("Users");
         Query searchQuery = usersRef.whereEqualTo("username", query);
         searchQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     QuerySnapshot querySnapshot = task.getResult();
-                    // If the searched is succesfull, add the first one.
+
+                    List<User> users = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : querySnapshot) {
+                        User user = document.toObject(User.class);
+                        users.add(user);
+                    }
+                    displayUser(users);
+
+
+
+                    /*// If the searched is succesfull, add the first one.
                     if (!querySnapshot.isEmpty()) {
                         User user = querySnapshot.getDocuments().get(0).toObject(User.class);
                         displayUser(user);
@@ -78,7 +94,7 @@ public class FriendsFragment extends Fragment {
                     } else {
                         // No users found
                         Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
                 } else {
                     // When there is an error for what ever reason.
                     Log.w("SEARCH", "Search failed", task.getException());
@@ -89,10 +105,10 @@ public class FriendsFragment extends Fragment {
 
     }
 
-    private void displayUser(User user) {
-        // Display the user's username
-        TextView usernameTextView = requireView().findViewById(R.id.txt_friend_username);
-        usernameTextView.setText(user.getUsername());
+    private void displayUser(List<User> friends) {
+        ListView listView = requireView().findViewById(R.id.listv_search_friends);
+        FriendsListAdapter adapter = new FriendsListAdapter(requireContext(), friends);
+        listView.setAdapter(adapter);
     }
 
 
