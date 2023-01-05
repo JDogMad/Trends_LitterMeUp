@@ -183,8 +183,6 @@
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
         app:layout_constraintTop_toTopOf="@+id/img_helper_3" />
 
-    <!-- TODO: FUNCTIONALITY -->
-
     <ImageView
         android:id="@+id/app_ic_language"
         android:layout_width="0dp"
@@ -248,7 +246,7 @@
         app:srcCompat="@drawable/ic_green_nightmode_blank" />
 
     <Button
-        android:id="@+id/title_nightmode"
+        android:id="@+id/btn_nightmode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
@@ -351,8 +349,6 @@
         app:layout_constraintStart_toEndOf="@+id/app_ic_privacy"
         app:layout_constraintTop_toTopOf="@+id/img_helper_16" />
 
-
-    <!-- TODO: Make this a logout button + functionality -->
     <ImageView
         android:id="@+id/app_ic_logout"
         android:layout_width="0dp"

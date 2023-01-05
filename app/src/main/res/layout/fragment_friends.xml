@@ -79,12 +79,13 @@
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
         app:layout_constraintTop_toTopOf="@+id/img_helper_4" />
 
-    <ListView
-        android:id="@+id/listv_search_friends"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_searched_friends"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
+        app:layout_constraintTop_toTopOf="@+id/img_helper_7"
+        tools:listitem="@layout/adapter_search_friends" />
 </androidx.constraintlayout.widget.ConstraintLayout>

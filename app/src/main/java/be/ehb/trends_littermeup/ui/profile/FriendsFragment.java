@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,18 +32,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.User;
 import be.ehb.trends_littermeup.databinding.FragmentFriendsBinding;
 import be.ehb.trends_littermeup.databinding.FragmentProfileBinding;
+import be.ehb.trends_littermeup.ui.dashboard.DashboardViewModel;
+import be.ehb.trends_littermeup.util.FeedAdapter;
 import be.ehb.trends_littermeup.util.FriendsListAdapter;
 
 public class FriendsFragment extends Fragment {
     private FragmentFriendsBinding binding;
 
     EditText txt_addFriends;
-    String txt_searched_friend;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         binding = FragmentFriendsBinding.inflate(inflater, container, false);
@@ -54,6 +59,7 @@ public class FriendsFragment extends Fragment {
                     // Perform the search
                     String query = textView.getText().toString();
                     search(query);
+
                     return true;
                 }
                 return false;
@@ -83,18 +89,6 @@ public class FriendsFragment extends Fragment {
                         users.add(user);
                     }
                     displayUser(users);
-
-
-
-                    /*// If the searched is succesfull, add the first one.
-                    if (!querySnapshot.isEmpty()) {
-                        User user = querySnapshot.getDocuments().get(0).toObject(User.class);
-                        displayUser(user);
-                        //addFriend(user);
-                    } else {
-                        // No users found
-                        Toast.makeText(getContext(), "No users found", Toast.LENGTH_SHORT).show();
-                    }*/
                 } else {
                     // When there is an error for what ever reason.
                     Log.w("SEARCH", "Search failed", task.getException());
@@ -106,9 +100,11 @@ public class FriendsFragment extends Fragment {
     }
 
     private void displayUser(List<User> friends) {
-        ListView listView = requireView().findViewById(R.id.listv_search_friends);
-        FriendsListAdapter adapter = new FriendsListAdapter(requireContext(), friends);
-        listView.setAdapter(adapter);
+        FriendsListAdapter adapter = new FriendsListAdapter();
+        adapter.addItems(friends);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        binding.rcSearchedFriends.setAdapter(adapter);
+        binding.rcSearchedFriends.setLayoutManager(layoutManager);
     }
 
 

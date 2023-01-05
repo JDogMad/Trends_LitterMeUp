@@ -44,8 +44,6 @@ public class ProfileFragment extends Fragment {
         TextView points = root.findViewById(R.id.txt_points);
         TextView level = root.findViewById(R.id.txt_level);
         fillUserData(username,points,level);
-        // TODO: Don't forget to call the adapter and link it with the ui
-
 
         // Redirect to the shop
         btn_coupon_5 = root.findViewById(R.id.btn_coupon_5);
@@ -131,6 +129,8 @@ public class ProfileFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        // TODO: Don't forget to call the adapter and link it with the ui
 
         return root;
     }

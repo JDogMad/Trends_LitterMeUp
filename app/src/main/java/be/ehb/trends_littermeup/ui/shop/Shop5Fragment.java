@@ -96,7 +96,7 @@ public class Shop5Fragment extends Fragment {
             }
         });
 
-        btn_redeem = root.findViewById(R.id.btn_redeem_50);
+        btn_redeem = root.findViewById(R.id.btn_redeem_5);
         btn_redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +125,7 @@ public class Shop5Fragment extends Fragment {
                         e.printStackTrace();
                     }
                     barcodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+
                     try {
                         fos.close();
                     } catch (IOException e) {

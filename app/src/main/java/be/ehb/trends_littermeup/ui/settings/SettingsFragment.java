@@ -1,5 +1,6 @@
 package be.ehb.trends_littermeup.ui.settings;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -37,7 +39,7 @@ import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
 
-    Button termsAndConditions, privacy, feedback, selected_language, logout;
+    Button termsAndConditions, privacy, feedback, selected_language, logout, darkmode;
     String languageCode;
 
     String[] languageCodes = {"en", "nl", "fr"};
@@ -130,6 +132,25 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 logoutUser();
+            }
+        });
+
+
+        // TODO: FIX THIS SHIT
+        darkmode = root.findViewById(R.id.btn_nightmode);
+        darkmode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentNightMode = AppCompatDelegate.getDefaultNightMode();
+                if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                    // Switch to light theme
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    // Switch to dark theme
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                // Get the parent activity
+                //getActivity().recreate();
             }
         });
 
