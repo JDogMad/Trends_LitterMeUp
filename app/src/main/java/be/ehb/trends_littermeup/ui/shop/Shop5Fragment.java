@@ -44,6 +44,7 @@ import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -95,7 +96,7 @@ public class Shop5Fragment extends Fragment {
             }
         });
 
-        btn_redeem = root.findViewById(R.id.btn_redeem_5);
+        btn_redeem = root.findViewById(R.id.btn_redeem_50);
         btn_redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +155,7 @@ public class Shop5Fragment extends Fragment {
 
                         // Create a MimeBodyPart for the message text
                         MimeBodyPart messageBodyPart = new MimeBodyPart();
-                        messageBodyPart.setText("Hi " + username + "\n\nYour 10 euro's coupon has been redeemed. Please show the following barcode at the store:\n\n");
+                        messageBodyPart.setText("Hi " + username + "\n\nYour 5 euro's coupon has been redeemed. Please show the following barcode at the store:\n\n");
 
                         // attach the barcode image
                         MimeBodyPart imagePart = new MimeBodyPart();
@@ -179,16 +180,12 @@ public class Shop5Fragment extends Fragment {
                         }).start();
 
                         points = points - 500;
-<<<<<<< Updated upstream
                         db.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
                             @Override
                             public void onChanged(User user) {
                                 db.changePointsOnUser(points, user);
                             }
                         });
-=======
-
->>>>>>> Stashed changes
                         System.out.println("Email sent");
 
                     } catch (MessagingException | IOException e) {
@@ -219,7 +216,6 @@ public class Shop5Fragment extends Fragment {
 
             }
         });
-
 
         return root;
     }

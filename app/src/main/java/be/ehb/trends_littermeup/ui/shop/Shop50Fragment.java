@@ -170,8 +170,6 @@ public class Shop50Fragment extends Fragment {
                             }
                         }).start();
 
-
-                        //TODO: REDUCE THE POINTS IN DATABASE
                         points = points - 5000;
                         db.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
                             @Override
