@@ -32,8 +32,8 @@ public class HomeFragment extends Fragment {
 
         txt_greeting = root.findViewById(R.id.txt_greeting);
         txt_points = root.findViewById(R.id.txt_points);
-        txt_cash = root.findViewById(R.id.txt_cash);
-        fillUserData(txt_greeting, txt_points, txt_cash);
+        //txt_cash = root.findViewById(R.id.txt_cash);
+        fillUserData(txt_greeting, txt_points);
 
         return root;
     }
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void fillUserData(TextView txt_greeting, TextView txt_points, TextView txt_cash){
+    public void fillUserData(TextView txt_greeting, TextView txt_points /*, TextView txt_cash*/){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         Database database = new Database();
         database.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
                 txt_points.setText(user.getPoints() + " LitterPoints");
 
                 // TODO: UPDATE BALANCE TO BE POINTS/100
-                txt_cash.setText("€" + (int) user.getBalance());
+                //txt_cash.setText("€" + (int) user.getBalance());
             }
         });
     }

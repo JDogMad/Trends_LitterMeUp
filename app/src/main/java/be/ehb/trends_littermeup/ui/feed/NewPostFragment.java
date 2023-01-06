@@ -54,9 +54,6 @@ public class NewPostFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NewPostViewModel newPostViewModel =
-                new ViewModelProvider(this).get(NewPostViewModel.class);
-
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Button addPic = root.findViewById(R.id.btn_addPic);
@@ -95,11 +92,9 @@ public class NewPostFragment extends Fragment {
                     }
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
-                        int redColorValue = Color.RED;
                         titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));
                     }
                     if(descriptionPost.getText().toString().isEmpty()){
-                        int redColorValue = Color.RED;
                         descriptionPost.setBackground(getResources().getDrawable(R.drawable.app_shape_5_error));
                     }
                     if(bitmap == null){
