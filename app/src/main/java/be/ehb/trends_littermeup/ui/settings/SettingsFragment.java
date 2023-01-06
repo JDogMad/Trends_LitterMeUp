@@ -137,7 +137,7 @@ public class SettingsFragment extends Fragment {
 
 
         // TODO: FIX THIS SHIT
-        darkmode = root.findViewById(R.id.btn_nightmode);
+        /*darkmode = root.findViewById(R.id.btn_nightmode);
         darkmode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +152,7 @@ public class SettingsFragment extends Fragment {
                 // Get the parent activity
                 //getActivity().recreate();
             }
-        });
+        });*/
 
         return root;
     }
