@@ -2,6 +2,7 @@ package be.ehb.trends_littermeup.ui.feed;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -21,6 +22,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,18 +42,18 @@ import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentNewpostBinding;
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
+import be.ehb.trends_littermeup.ui.settings.SettingsFragment;
 
 public class NewPostFragment extends Fragment {
     private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int REQUEST_CAMERA_PERMISSION = 2;
+
     private FragmentNewpostBinding binding;
     private Bitmap bitmap;
     private Database db = new Database();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NewPostViewModel newPostViewModel =
-                new ViewModelProvider(this).get(NewPostViewModel.class);
-
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         Button addPic = root.findViewById(R.id.btn_addPic);
@@ -73,15 +77,25 @@ public class NewPostFragment extends Fragment {
                     post.setNameFile("Image-" + post.getId() + ".jpg");
                     savePicture(post);
                     db.add(post);
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    if (fragmentManager != null) {
+                        Button button1 = getView().findViewById(R.id.btn_addPic);
+                        Button button2 = getView().findViewById(R.id.btn_post);
+
+                        button1.setVisibility(View.GONE);
+                        button2.setVisibility(View.GONE);
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.const_newpost, new DashboardFragment())
+                                .commit();
+                    }
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
-                        int redColorValue = Color.RED;
-                        titlePost.setBackgroundColor(redColorValue);
+                        titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));
                     }
                     if(descriptionPost.getText().toString().isEmpty()){
-                        int redColorValue = Color.RED;
-                        descriptionPost.setBackgroundColor(redColorValue);
+                        descriptionPost.setBackground(getResources().getDrawable(R.drawable.app_shape_5_error));
                     }
                     if(bitmap == null){
                         Toast.makeText(getActivity(), "No Picture included", Toast.LENGTH_SHORT).show();
@@ -94,9 +108,21 @@ public class NewPostFragment extends Fragment {
 
 
     public void takeAndSavePicture() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
-
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+            // Permissions are not granted, request them
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_CAMERA_PERMISSION);
+        } else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, CAMERA_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -107,7 +133,6 @@ public class NewPostFragment extends Fragment {
             bitmap = imageBitmap;
         }
     }
-
 
 
     public void savePicture(Post post) {
@@ -135,6 +160,18 @@ public class NewPostFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted, take picture
+                takeAndSavePicture();
+            } else {
+                // Permission is denied, show message to user
+                Toast.makeText(getActivity(), "CAMERA permission is required to take a picture", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     public void onDestroyView() {

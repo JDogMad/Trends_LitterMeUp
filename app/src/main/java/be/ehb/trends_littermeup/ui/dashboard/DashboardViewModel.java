@@ -8,23 +8,41 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import be.ehb.trends_littermeup.Post;
+
 public class DashboardViewModel extends AndroidViewModel {
-    private ExecutorService executorService = Executors.newFixedThreadPool(2);
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public DashboardViewModel(@NonNull Application application) {
         super(application);
     }
 
-
-
-    // Voorbeeld
-    /*public LiveData<List<Posts>> getAllNotes(){
-        // Hier komt u get posts shit
-        return noteDataBass.getNoteDAO().getAllNotes();
-    }*/
+    public MutableLiveData<List<Post>> getAllPostsDB(){
+        MutableLiveData<List<Post>> posts = new MutableLiveData<>();
+        CollectionReference postsRef = db.collection("Posts");
+        postsRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<Post> postList = new ArrayList<>();
+                for (DocumentSnapshot documentSnapchot: queryDocumentSnapshots.getDocuments()) {
+                    Post post = documentSnapchot.toObject(Post.class);
+                    postList.add(post);
+                }
+                posts.setValue(postList);
+            }
+        });
+        return posts;
+    }
 
 }

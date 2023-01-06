@@ -19,14 +19,9 @@ public class MapsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel mapsViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
         binding = FragmentMapsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        // final TextView textView = binding.textNotifications;
-        // mapsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

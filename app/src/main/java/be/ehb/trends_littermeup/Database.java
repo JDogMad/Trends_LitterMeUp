@@ -68,7 +68,6 @@ public class Database {
     }
 
 
-
     public MutableLiveData<User> getUserFromDbByUid(String uid){
         MutableLiveData<User> user = new MutableLiveData<>();
         DocumentReference documentReference = db.collection("Users").document(uid);
@@ -79,5 +78,11 @@ public class Database {
             }
         });
     return user;
+    }
+
+    public Task<Void> changePointsOnUser(int punten, User user){
+        DocumentReference documentReference = db.collection("Users").document(user.getUid());
+        user.setPoints(punten);
+        return documentReference.set(user);
     }
 }

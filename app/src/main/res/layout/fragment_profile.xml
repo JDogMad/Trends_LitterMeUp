@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/const_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_gray"
@@ -138,6 +139,34 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.60" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
     <TextView
         android:id="@+id/app_profile_sub"
         android:layout_width="0dp"
@@ -170,16 +199,16 @@
         android:id="@+id/img_user_pic"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitCenter"
         android:background="@drawable/app_shape_round_outline"
         android:clipToOutline="true"
+        android:contentDescription="profile_pic"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/img_helper_8"
         app:layout_constraintDimensionRatio="3:3"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
         app:layout_constraintStart_toStartOf="@+id/img_helper_5"
         app:layout_constraintTop_toTopOf="@+id/img_helper_7"
-        app:srcCompat="@drawable/placeholder_profile"
-        android:contentDescription="profile_pic" />
+        app:srcCompat="@drawable/placeholder_profile" />
 
     <TextView
         android:id="@+id/txt_username"
@@ -189,7 +218,7 @@
         android:text="@string/placeholder_username"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintStart_toStartOf="@+id/img_helper_6"
         app:layout_constraintTop_toTopOf="@+id/img_helper_7" />
@@ -267,17 +296,77 @@
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_14" />
 
-    <LinearLayout
-        android:id="@+id/app_shape_5"
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_shop_5"
+        app:layout_constraintBottom_toBottomOf="@+id/img_helper_14"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
+        android:scaleType="centerCrop"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_5"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_15"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_coupon_5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/app_shape_3"
         android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.1"
+        app:backgroundTint="@color/green_1"
         app:layout_constraintBottom_toBottomOf="@+id/img_helper_14"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="@+id/img_helper_5"
         app:layout_constraintTop_toTopOf="@+id/img_helper_15"
-        app:layout_constraintVertical_bias="0.0">
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_shop_50"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_16"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_19"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_18"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_15"/>
+
+    <Button
+        android:id="@+id/btn_coupon_50"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_3"
+        android:orientation="horizontal"
+        app:backgroundTint="@color/green_1"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_16"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_19"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_18"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_15" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_shop_100"
+        android:scaleType="centerCrop"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_16"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_21"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_20"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_15"/>
+
+    <Button
+        android:id="@+id/btn_coupon_100"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_3"
+        android:orientation="horizontal"
+        app:backgroundTint="@color/green_1"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_16"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_21"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_20"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

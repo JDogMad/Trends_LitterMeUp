@@ -26,26 +26,32 @@ import java.util.ArrayList;
 import be.ehb.trends_littermeup.R;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
-    // Arraylists for the items in the DataBass blijkbaar
-    // Gewoon uncomment
-    // private ArrayList<Post> items;
+    private ArrayList<Post> items;
 
+    public FeedAdapter(){
+        items = new ArrayList<>();
+    }
 
-    // Hier moet je niks doen
+    public void addItems(List<Post> items){
+        this.items = new ArrayList<>(items);
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_userPosted;
-        ImageView img_userPosted;
+        TextView txt_postTitle, txt_postDescription;
+        ImageView img_userPosted, img_feedPost;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            txt_userPosted = itemView.findViewById(R.id.txt_titlePosted);
+            txt_postTitle = itemView.findViewById(R.id.txt_titlePosted);
+            txt_postDescription = itemView.findViewById(R.id.txt_descriptionPosted);
             img_userPosted = itemView.findViewById(R.id.img_userPosted_pic);
+            img_feedPost = itemView.findViewById(R.id.img_feedPost);
         }
     }
 
 
-    // Hier moet je niks doen
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,17 +61,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Voorbeeld: Hier set je de individuele zaken
-        // --> txt_userPosted => title
-        /* Note currentItem = items.get(position);
-        holder.txt_userPosted.setText(currentItem.getTitle()); */
+        Post currentItem = items.get(position);
+        holder.txt_postTitle.setText(currentItem.getTitel());
+        holder.txt_postDescription.setText(currentItem.getDescription());
+        holder.img_feedPost.setImageBitmap(currentItem.getBitmap());
     }
 
     @Override
     public int getItemCount() {
-        // Size van uw arraylist
-        // return items.size();
-        return 0;
+        return items.size();
     }
 
 }
