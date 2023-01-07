@@ -13,20 +13,29 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+import java.util.Objects;
+
 import be.ehb.trends_littermeup.Database;
+import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.User;
 import be.ehb.trends_littermeup.databinding.FragmentProfileBinding;
+import be.ehb.trends_littermeup.ui.dashboard.DashboardViewModel;
 import be.ehb.trends_littermeup.ui.home.HomeViewModel;
 import be.ehb.trends_littermeup.ui.shop.Shop100Fragment;
 import be.ehb.trends_littermeup.ui.shop.Shop50Fragment;
 import be.ehb.trends_littermeup.ui.shop.Shop5Fragment;
+import be.ehb.trends_littermeup.util.FeedAdapter;
+import be.ehb.trends_littermeup.util.FriendsAdapter;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -130,7 +139,17 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        // TODO: Don't forget to call the adapter and link it with the ui
+        ProfileViewModel viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
+        FriendsAdapter friendsAdapter = new FriendsAdapter();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        binding.rcFriends.setAdapter(friendsAdapter);
+        binding.rcFriends.setLayoutManager(layoutManager);
+        viewModel.getAllFriends().observe(getViewLifecycleOwner(), new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                friendsAdapter.addItems(users);
+            }
+        });
 
         return root;
     }

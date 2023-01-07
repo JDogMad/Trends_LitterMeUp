@@ -36,6 +36,9 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //TODO: REDIRECT BIG TRASH and SMALL TRASH => TO NEWPOST
+        // REMOVE IN LAYOUT OPEN CAMERA
+
         binding.btnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -154,6 +154,8 @@ public class SettingsFragment extends Fragment {
             }
         });*/
 
+        // TODO: THINK ABOUT ACHIEVEMENTS
+
         return root;
     }
 

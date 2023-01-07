@@ -30,6 +30,8 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        //TODO: CHANGE ADAPTER TO SHOW PLACES
+
         txt_greeting = root.findViewById(R.id.txt_greeting);
         txt_points = root.findViewById(R.id.txt_points);
         //txt_cash = root.findViewById(R.id.txt_cash);

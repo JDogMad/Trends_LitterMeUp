@@ -101,7 +101,6 @@ public class NewPostFragment extends Fragment implements LocationListener {
         newPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(!(titlePost.getText().toString().isEmpty()) && !(titlePost.getText().toString().isEmpty()) && bitmap != null){
                     db.getPostCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
                         @Override
@@ -216,6 +215,7 @@ public class NewPostFragment extends Fragment implements LocationListener {
 
 
     private void getUserLocation() {
+        //TODO: PERMISSION DENIED OR NOT GIVEN => BE SURE TO ASK
         locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String bestProvider = locationManager.getBestProvider(criteria, true);

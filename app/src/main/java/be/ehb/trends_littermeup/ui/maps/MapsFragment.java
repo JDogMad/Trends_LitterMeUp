@@ -8,13 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,7 +32,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -44,7 +52,7 @@ public class MapsFragment extends Fragment {
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private String title;
-    private LatLng locationLL;
+    private LatLng mapLocation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,35 +78,38 @@ public class MapsFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Map<String, Object> data = document.getData();
                         Post post = new Post();
-                        title = (String) data.get("title");
+                        // Set the fields for the Post object
+                        post.setTitel((String) data.get("titel"));
 
-                        Object locationData = data.get("location");
-                        if (locationData != null) {
-                            // Use LatLngDeserializer to deserialize the "location" field from the map
-                            LatLngDeserializer latLngDeserializer = new LatLngDeserializer();
+                        // Check if there is a location in post => avoids errors
+                        if (data.containsKey("location")) {
+                            // Deserialize the JSON object stored in the "location" field
                             ObjectMapper mapper = new ObjectMapper();
-                            Map<String, Object> locationMap = (Map<String, Object>) data.get("location");
                             String locationJson = null;
                             try {
-                                locationJson = mapper.writeValueAsString(locationMap);
+                                locationJson = mapper.writeValueAsString(data.get("location"));
                             } catch (JsonProcessingException e) {
                                 e.printStackTrace();
                             }
+                            JsonParser parser = null;
+                            try {
+                                parser = mapper.getFactory().createParser(locationJson);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            LatLngDeserializer latLngDeserializer = new LatLngDeserializer();
                             LatLng location = null;
                             try {
-                                location = mapper.readValue(locationJson, LatLng.class);
-                            } catch (JsonProcessingException e) {
+                                location = latLngDeserializer.deserialize(parser, null);
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            locationLL = location;
 
-                            if(locationLL != null){
-                                map.addMarker(new MarkerOptions().position(post.getLocation()).title(post.getTitel()));
-                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(post.getLocation(), 10));
-                            }
+                            // Add a marker to the map using the deserialized LatLng object
+                            map.addMarker(new MarkerOptions().position(location).title(post.getTitel()));
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10));
                         }
                     }
-
                 } else {
                     Log.d(TAG, Objects.requireNonNull(task.getException()).getMessage());
                 }

@@ -1,26 +1,44 @@
 package be.ehb.trends_littermeup.util;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import be.ehb.trends_littermeup.Database;
 import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.User;
+import be.ehb.trends_littermeup.ui.profile.FriendsFragment;
 
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.ViewHolder> {
     private ArrayList<User> users;
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public FriendsListAdapter() {
         users = new ArrayList<>();
@@ -46,8 +64,24 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
                     if (position != RecyclerView.NO_POSITION) {
                         User user = users.get(position);
                         int friendId = user.getId();
-                        System.out.println("FRIENDOOOOOOOO " + friendId);
-                        // TODO: DON'T FORGET TO ADD THE FRIEND'S ID TO THE DATABASE
+
+                        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                        db.collection("Users").document(mAuth.getUid())
+                                .update("friendId", FieldValue.arrayUnion(friendId))
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(btn_add_friend.getContext(), "Friend added", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(btn_add_friend.getContext(), "Something went wrong, try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                     }
                 }
             });

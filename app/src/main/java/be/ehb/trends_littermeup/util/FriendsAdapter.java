@@ -10,35 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
+import be.ehb.trends_littermeup.User;
 
-// TODO: THE BINDING WITH THE DATBASE
+
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder> {
-    private Context context;
-    // private List<YourModel> modelList;
+    private ArrayList<User> items;
 
-
-    @NonNull
-    @Override
-    public FriendsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_friends, parent, false);
-        return new ViewHolder(view);
+    public FriendsAdapter(){
+        items = new ArrayList<>();
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull FriendsAdapter.ViewHolder holder, int position) {
-        // This needs to get the data from the database
-        // Something like
-        /* YourModel model = modelList.get(position);
-        holder.textView.setText(model.getName());
-        holder.imageView.setImageResource(model.getImage()); */
-    }
-
-    @Override
-    public int getItemCount() {
-        // This needs to change
-        // It will return someting like return modelList.size();
-        return 10;
+    public void addItems(List<User> items){
+        this.items = new ArrayList<>(items);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,8 +44,26 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         }
     }
 
-    public FriendsAdapter( /* List<YourModel> modelList , */ Context context) {
-        // this.modelList = modelList;
-        this.context = context;
+
+    @NonNull
+    @Override
+    public FriendsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_friends, parent, false);
+        return new ViewHolder(view);
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull FriendsAdapter.ViewHolder holder, int position) {
+        User currentItem = items.get(position);
+        holder.txt_friendsName.setText(currentItem.getUsername());
+        //holder.txt_friendsLevel.setText(currentItem.getPoints());
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+
+    }
+
+
 }
