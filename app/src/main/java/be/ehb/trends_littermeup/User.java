@@ -11,10 +11,9 @@ import java.util.List;
 public class User {
     private List<Integer> friendId;
     private String email, username;
-    private int points;
+    private int points,id;
     private double balance;
     private Image profilePicture;
-
     private String uid;
 
 
@@ -22,10 +21,11 @@ public class User {
     public User() {
     }
 
-    public User(String email, String username, String uid) {
+    public User(String email, String username, String uid, int id) {
         this.uid = uid;
         this.points = 0;
         this.balance = 0;
+        this.id = id;
         this.email = email;
         this.username = username;
     }
@@ -107,5 +107,17 @@ public class User {
     @Exclude
     public User getUser(){
         return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -13,6 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -79,5 +82,25 @@ public class Database {
             }
         });
     return user;
+    }
+
+    public Task<Void> changePointsOnUser(int punten, User user){
+        DocumentReference documentReference = db.collection("Users").document(user.getUid());
+        user.setPoints(punten);
+        return documentReference.set(user);
+    }
+
+    public MutableLiveData<Integer> getUserCount() {
+        MutableLiveData<Integer> count = new MutableLiveData<Integer>();
+        CollectionReference collectionReference = db.collection("Users");
+        AggregateQuery countQuery = collectionReference.count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                count.setValue((int) snapshot.getCount());
+            }
+        });
+        return count;
     }
 }
