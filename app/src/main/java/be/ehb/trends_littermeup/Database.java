@@ -103,4 +103,18 @@ public class Database {
         });
         return count;
     }
+
+    public MutableLiveData<Integer> getPostCount(){
+        MutableLiveData<Integer> count = new MutableLiveData<Integer>();
+        CollectionReference collectionReference = db.collection("Posts");
+        AggregateQuery countQuery = collectionReference.count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                count.setValue((int) snapshot.getCount());
+            }
+        });
+        return count;
+    }
 }

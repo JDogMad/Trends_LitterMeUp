@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +42,8 @@ import java.util.Random;
 import be.ehb.trends_littermeup.Database;
 import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
+import be.ehb.trends_littermeup.RegisterActivity;
+import be.ehb.trends_littermeup.User;
 import be.ehb.trends_littermeup.databinding.FragmentNewpostBinding;
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
 
@@ -49,12 +52,10 @@ public class NewPostFragment extends Fragment {
     private FragmentNewpostBinding binding;
     private Bitmap bitmap;
     private Database db = new Database();
-    private int size;
     private FirebaseFirestore fDb = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        getSizeOfFB();
         NewPostViewModel newPostViewModel =
                 new ViewModelProvider(this).get(NewPostViewModel.class);
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
@@ -77,11 +78,27 @@ public class NewPostFragment extends Fragment {
             public void onClick(View view) {
 
                 if(!(titlePost.getText().toString().isEmpty()) && !(titlePost.getText().toString().isEmpty()) && bitmap != null){
-                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(),size);
-                    size++;
-                    post.setNameFile("Image-" + post.getId() + ".jpg");
-                    savePicture(post);
-                    db.add(post);
+                    db.getPostCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer integer) {
+                            int tempId = integer.intValue() + 1;
+                            Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(),tempId);
+                            post.setNameFile("Image-" + post.getId() + ".jpg");
+                            savePicture(post);
+                            db.add(post);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            if (fragmentManager != null) {
+                                Button button1 = getView().findViewById(R.id.btn_addPic);
+                                Button button2 = getView().findViewById(R.id.btn_post);
+
+                                button1.setVisibility(View.GONE);
+                                button2.setVisibility(View.GONE);
+
+                                fragmentManager.beginTransaction().replace(R.id.const_newpost, new DashboardFragment()).commit();
+                            }
+                        }
+                    });
+
                     //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
@@ -149,18 +166,5 @@ public class NewPostFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    public void getSizeOfFB(){
-        CollectionReference collectionRef = fDb.collection("Posts");
-        collectionRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    QuerySnapshot snapshot = task.getResult();
-                    size = snapshot.size();
-                }
-            }
-        });
     }
 }
