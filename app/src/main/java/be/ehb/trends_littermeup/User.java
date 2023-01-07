@@ -11,15 +11,9 @@ import java.util.List;
 public class User {
     private List<Integer> friendId;
     private String email, username;
-    private int id, points;
+    private int points,id;
     private double balance;
     private Image profilePicture;
-
-    public static int getCounter() {
-        return counter;
-    }
-
-    static int counter = 1;
     private String uid;
 
 
@@ -27,14 +21,13 @@ public class User {
     public User() {
     }
 
-    public User(String email, String username, String uid) {
+    public User(String email, String username, String uid, int id) {
         this.uid = uid;
         this.points = 0;
         this.balance = 0;
-        this.id = counter;
+        this.id = id;
         this.email = email;
         this.username = username;
-        counter++;
     }
 
 
@@ -46,7 +39,6 @@ public class User {
                 "friendId=" + friendId +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
-                ", id=" + id +
                 ", points=" + points +
                 ", balance=" + balance +
                 ", profilePicture=" + profilePicture +
@@ -85,14 +77,6 @@ public class User {
         this.friendId = friendId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getPoints() {
         return points;
     }
@@ -123,5 +107,17 @@ public class User {
     @Exclude
     public User getUser(){
         return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

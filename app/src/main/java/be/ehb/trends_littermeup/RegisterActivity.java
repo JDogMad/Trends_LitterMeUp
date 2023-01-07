@@ -4,6 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -83,15 +85,22 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if(!(email.isEmpty()||password.isEmpty()|| username.isEmpty())){
+
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
+                                database.getUserCount().observe(RegisterActivity.this, new Observer<Integer>() {
+                                    @Override
+                                    public void onChanged(Integer integer) {
+                                        int tempId = integer.intValue() + 1;
+                                        User newUser = new User(email,username,mAuth.getCurrentUser().getUid(),tempId);
+                                        database.add(newUser);
+                                    }
+                                });
                                 Log.d(TAG, "createUserWithEmail:success");
-                                User newUser = new User(email,username,mAuth.getCurrentUser().getUid());
-                                database.add(newUser);
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 showMainActivity();
                             } else {

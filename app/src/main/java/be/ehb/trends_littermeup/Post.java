@@ -2,17 +2,26 @@ package be.ehb.trends_littermeup;
 
 import android.graphics.Bitmap;
 
+
+import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class Post {
     private Bitmap bitmap;
     private int id;
     private String titel;
     private String description;
-    private static int counter = 1;
+
     private String nameFile;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @JsonDeserialize(using = LatLngDeserializer.class)
     private LatLng location;
@@ -20,13 +29,12 @@ public class Post {
     public Post() {
     }
 
-    public Post(Bitmap bitmap, String titel, String description, LatLng location) {
+    public Post(Bitmap bitmap, String titel, String description, LatLng location, int id) {
         this.bitmap = bitmap;
         this.titel = titel;
         this.description = description;
-        this.id = counter;
+        this.id = id;
         this.location = location;
-        counter++;
     }
 
     @Exclude
@@ -62,10 +70,6 @@ public class Post {
         this.description = description;
     }
 
-    public static int getCounter() {
-        return counter;
-    }
-
     public LatLng getLocation() {
         return location;
     }
@@ -73,6 +77,7 @@ public class Post {
     public void setLocation(LatLng location) {
         this.location = location;
     }
+
 
     public String getNameFile() {
         return nameFile;

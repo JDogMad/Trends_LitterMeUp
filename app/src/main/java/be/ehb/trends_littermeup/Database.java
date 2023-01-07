@@ -13,6 +13,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.AggregateQuery;
+import com.google.firebase.firestore.AggregateQuerySnapshot;
+import com.google.firebase.firestore.AggregateSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,7 +50,7 @@ public class Database {
         File myDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "saved_images");
         File file = new File(myDir, imageName);
         storage.getReference(imageName).putFile(Uri.fromFile(file));
-        return db.collection("Posts").document(Integer.toString(post.getId())).set(post);
+        return db.collection("Posts").document().set(post);
     }
 
     public MutableLiveData<List<Post>> getAllPostsDB(){
@@ -84,5 +87,34 @@ public class Database {
         DocumentReference documentReference = db.collection("Users").document(user.getUid());
         user.setPoints(punten);
         return documentReference.set(user);
+    }
+
+
+    public MutableLiveData<Integer> getUserCount() {
+        MutableLiveData<Integer> count = new MutableLiveData<Integer>();
+        CollectionReference collectionReference = db.collection("Users");
+        AggregateQuery countQuery = collectionReference.count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                count.setValue((int) snapshot.getCount());
+            }
+        });
+        return count;
+    }
+
+    public MutableLiveData<Integer> getPostCount(){
+        MutableLiveData<Integer> count = new MutableLiveData<Integer>();
+        CollectionReference collectionReference = db.collection("Posts");
+        AggregateQuery countQuery = collectionReference.count();
+        countQuery.get(AggregateSource.SERVER).addOnCompleteListener(new OnCompleteListener<AggregateQuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<AggregateQuerySnapshot> task) {
+                AggregateQuerySnapshot snapshot = task.getResult();
+                count.setValue((int) snapshot.getCount());
+            }
+        });
+        return count;
     }
 }

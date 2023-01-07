@@ -33,8 +33,20 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,6 +56,8 @@ import java.util.Objects;
 import be.ehb.trends_littermeup.Database;
 import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
+import be.ehb.trends_littermeup.RegisterActivity;
+import be.ehb.trends_littermeup.User;
 import be.ehb.trends_littermeup.databinding.FragmentNewpostBinding;
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
 
@@ -55,6 +69,7 @@ public class NewPostFragment extends Fragment implements LocationListener {
     private FragmentNewpostBinding binding;
     private Bitmap bitmap;
     private Database db = new Database();
+    private FirebaseFirestore fDb = FirebaseFirestore.getInstance();
 
     LocationManager locationManager;
     Location location;
@@ -63,6 +78,8 @@ public class NewPostFragment extends Fragment implements LocationListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        NewPostViewModel newPostViewModel =
+                new ViewModelProvider(this).get(NewPostViewModel.class);
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -84,27 +101,30 @@ public class NewPostFragment extends Fragment implements LocationListener {
         newPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(!(titlePost.getText().toString().isEmpty()) && !(titlePost.getText().toString().isEmpty()) && bitmap != null){
-                    // Initialize a new Post, using the constructor to get every attribute
-                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(), latLng);
+                    db.getPostCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer integer) {
+                            int tempId = integer.intValue() + 1;
+                            Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(), latLng,tempId);
+                            post.setNameFile("Image-" + post.getId() + ".jpg");
+                            savePicture(post);
+                            db.add(post);
+                            FragmentManager fragmentManager = getFragmentManager();
+                            if (fragmentManager != null) {
+                                Button button1 = getView().findViewById(R.id.btn_addPic);
+                                Button button2 = getView().findViewById(R.id.btn_post);
 
-                    post.setNameFile("Image-" + post.getId() + ".jpg");
-                    savePicture(post);
-                    db.add(post);
+                                button1.setVisibility(View.GONE);
+                                button2.setVisibility(View.GONE);
 
-                    FragmentManager fragmentManager = getFragmentManager();
-                    if (fragmentManager != null) {
-                        Button button1 = getView().findViewById(R.id.btn_addPic);
-                        Button button2 = getView().findViewById(R.id.btn_post);
+                                fragmentManager.beginTransaction().replace(R.id.const_newpost, new DashboardFragment()).commit();
+                            }
+                        }
+                    });
 
-                        button1.setVisibility(View.GONE);
-                        button2.setVisibility(View.GONE);
-
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.const_newpost, new DashboardFragment())
-                                .commit();
-                    }
-
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
                         titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));
