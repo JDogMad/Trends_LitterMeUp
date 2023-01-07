@@ -8,7 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/app_home"
+        android:id="@+id/txt_greeting"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,7 +29,7 @@
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/app_home" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_greeting" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_helper_1"

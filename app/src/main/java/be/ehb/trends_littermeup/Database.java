@@ -71,7 +71,6 @@ public class Database {
     }
 
 
-
     public MutableLiveData<User> getUserFromDbByUid(String uid){
         MutableLiveData<User> user = new MutableLiveData<>();
         DocumentReference documentReference = db.collection("Users").document(uid);
@@ -89,6 +88,7 @@ public class Database {
         user.setPoints(punten);
         return documentReference.set(user);
     }
+
 
     public MutableLiveData<Integer> getUserCount() {
         MutableLiveData<Integer> count = new MutableLiveData<Integer>();

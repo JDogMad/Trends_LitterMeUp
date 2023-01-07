@@ -2,11 +2,13 @@ package be.ehb.trends_littermeup;
 
 import android.graphics.Bitmap;
 
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -21,15 +23,18 @@ public class Post {
     private String nameFile;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    @JsonDeserialize(using = LatLngDeserializer.class)
+    private LatLng location;
+
     public Post() {
     }
 
-    public Post(Bitmap bitmap, String titel, String description,int id) {
+    public Post(Bitmap bitmap, String titel, String description, LatLng location, int id) {
         this.bitmap = bitmap;
         this.titel = titel;
         this.description = description;
         this.id = id;
-
+        this.location = location;
     }
 
     @Exclude
@@ -64,6 +69,15 @@ public class Post {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public LatLng getLocation() {
+        return location;
+    }
+
+    public void setLocation(LatLng location) {
+        this.location = location;
+    }
+
 
     public String getNameFile() {
         return nameFile;
