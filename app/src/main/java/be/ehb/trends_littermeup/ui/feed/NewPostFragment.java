@@ -3,12 +3,17 @@ package be.ehb.trends_littermeup.ui.feed;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
@@ -27,37 +32,43 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.google.api.Context;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-import java.util.Random;
+import java.util.Objects;
 
 import be.ehb.trends_littermeup.Database;
 import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentNewpostBinding;
 import be.ehb.trends_littermeup.ui.dashboard.DashboardFragment;
-import be.ehb.trends_littermeup.ui.settings.SettingsFragment;
 
-public class NewPostFragment extends Fragment {
+public class NewPostFragment extends Fragment implements LocationListener {
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 2;
+    private static final int REQUEST_LOCATION_PERMISSION = 3;
 
     private FragmentNewpostBinding binding;
     private Bitmap bitmap;
     private Database db = new Database();
 
+    LocationManager locationManager;
+    Location location;
+    LatLng latLng;
+    private double latitude, longitude;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        getUserLocation();
+
         Button addPic = root.findViewById(R.id.btn_addPic);
-        Button newPost = root.findViewById(R.id.btn_post);
         EditText titlePost = root.findViewById(R.id.txt_newPost_title);
         EditText descriptionPost = root.findViewById(R.id.txt_newPost_description);
         addPic.setOnClickListener(new View.OnClickListener() {
@@ -69,11 +80,14 @@ public class NewPostFragment extends Fragment {
             }
         });
 
+        Button newPost = root.findViewById(R.id.btn_post);
         newPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!(titlePost.getText().toString().isEmpty()) && !(titlePost.getText().toString().isEmpty()) && bitmap != null){
-                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString());
+                    // Initialize a new Post, using the constructor to get every attribute
+                    Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(), latLng);
+
                     post.setNameFile("Image-" + post.getId() + ".jpg");
                     savePicture(post);
                     db.add(post);
@@ -90,6 +104,7 @@ public class NewPostFragment extends Fragment {
                                 .replace(R.id.const_newpost, new DashboardFragment())
                                 .commit();
                     }
+
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
                         titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));
@@ -177,5 +192,71 @@ public class NewPostFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    private void getUserLocation() {
+        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String bestProvider = locationManager.getBestProvider(criteria, true);
+
+        // A listener for any updates of location
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Is changed when there is a new provider
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                latLng = new LatLng(latitude, longitude);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+            return;
+        }
+
+        List<String> providers = locationManager.getProviders(true);
+        if (!providers.isEmpty()) {
+            String provider = providers.get(0);
+            locationManager.requestLocationUpdates(provider, 0, 0, locationListener);
+        }
+
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            latLng = new LatLng(latitude, longitude);
+        }
+    }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        // Update the latitude and longitude when the location changes
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        latLng = new LatLng(latitude, longitude);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }

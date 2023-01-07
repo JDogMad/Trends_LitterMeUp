@@ -2,6 +2,8 @@ package be.ehb.trends_littermeup;
 
 import android.graphics.Bitmap;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.Exclude;
 
 public class Post {
@@ -12,14 +14,18 @@ public class Post {
     private static int counter = 1;
     private String nameFile;
 
+    @JsonDeserialize(using = LatLngDeserializer.class)
+    private LatLng location;
+
     public Post() {
     }
 
-    public Post(Bitmap bitmap, String titel, String description) {
+    public Post(Bitmap bitmap, String titel, String description, LatLng location) {
         this.bitmap = bitmap;
         this.titel = titel;
         this.description = description;
         this.id = counter;
+        this.location = location;
         counter++;
     }
 
@@ -58,6 +64,14 @@ public class Post {
 
     public static int getCounter() {
         return counter;
+    }
+
+    public LatLng getLocation() {
+        return location;
+    }
+
+    public void setLocation(LatLng location) {
+        this.location = location;
     }
 
     public String getNameFile() {
