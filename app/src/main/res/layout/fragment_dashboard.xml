@@ -192,21 +192,6 @@
         app:layout_constraintStart_toStartOf="@+id/img_helper_7"
         app:layout_constraintTop_toTopOf="@+id/img_helper_9" />
 
-    <Button
-        android:id="@+id/btn_openCamera"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="?android:selectableItemBackground"
-        android:text="@string/subTitle_openCamera"
-        android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_10" />
-
     <TextView
         android:id="@+id/app_feed_sub"
         android:layout_width="0dp"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,10 +24,13 @@ import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentDashboardBinding;
 import be.ehb.trends_littermeup.ui.feed.NewPostFragment;
+import be.ehb.trends_littermeup.ui.feed.NewPostViewModel;
 import be.ehb.trends_littermeup.util.FeedAdapter;
 
 public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
+    NewPostViewModel newPostViewModel;
+    Button btn_smallTrash, btn_bigTrash;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +41,47 @@ public class DashboardFragment extends Fragment {
         View root = binding.getRoot();
 
         //TODO: REDIRECT BIG TRASH and SMALL TRASH => TO NEWPOST
-        // REMOVE IN LAYOUT OPEN CAMERA
+        btn_smallTrash = root.findViewById(R.id.btn_camera_smallTrash);
+        btn_smallTrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                NewPostFragment newPostFragment = new NewPostFragment();
+
+                Button button1 = getView().findViewById(R.id.btn_camera_smallTrash);
+                Button button2 = getView().findViewById(R.id.btn_camera_bigTrash);
+                FloatingActionButton button4 = getView().findViewById(R.id.btn_new_post);
+
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+                button4.setVisibility(View.GONE);
+
+                transaction.replace(R.id.const_dashboard, newPostFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        btn_bigTrash = root.findViewById(R.id.btn_camera_bigTrash);
+        btn_bigTrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                NewPostFragment newPostFragment = new NewPostFragment();
+
+                Button button1 = getView().findViewById(R.id.btn_camera_smallTrash);
+                Button button2 = getView().findViewById(R.id.btn_camera_bigTrash);
+                FloatingActionButton button4 = getView().findViewById(R.id.btn_new_post);
+
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+                button4.setVisibility(View.GONE);
+
+                transaction.replace(R.id.const_dashboard, newPostFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         binding.btnNewPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +91,10 @@ public class DashboardFragment extends Fragment {
 
                 Button button1 = getView().findViewById(R.id.btn_camera_smallTrash);
                 Button button2 = getView().findViewById(R.id.btn_camera_bigTrash);
-                Button button3 = getView().findViewById(R.id.btn_openCamera);
                 FloatingActionButton button4 = getView().findViewById(R.id.btn_new_post);
 
                 button1.setVisibility(View.GONE);
                 button2.setVisibility(View.GONE);
-                button3.setVisibility(View.GONE);
                 button4.setVisibility(View.GONE);
 
                 transaction.replace(R.id.const_dashboard, newPostFragment);

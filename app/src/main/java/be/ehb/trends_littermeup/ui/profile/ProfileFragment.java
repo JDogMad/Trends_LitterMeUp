@@ -151,6 +151,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //TODO: Change the profile picture of the user
+        // But only with selected profiles pictures
         return root;
     }
 

@@ -41,9 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
         //Initialize Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
+            System.out.println("User is not null:" + mAuth.getCurrentUser());
             finish();
             return;
         }
+
         Button btnRegister = findViewById(R.id.btn_register);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if(!(email.isEmpty()||password.isEmpty()|| username.isEmpty())){
-
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

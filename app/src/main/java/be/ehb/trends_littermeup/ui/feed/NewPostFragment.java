@@ -24,9 +24,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -76,10 +78,12 @@ public class NewPostFragment extends Fragment implements LocationListener {
     LatLng latLng;
     private double latitude, longitude;
 
+    NewPostViewModel viewModel;
+    TextView txt_newPostTitle;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NewPostViewModel newPostViewModel =
-                new ViewModelProvider(this).get(NewPostViewModel.class);
+
         binding = FragmentNewpostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -91,9 +95,7 @@ public class NewPostFragment extends Fragment implements LocationListener {
         addPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 takeAndSavePicture();
-
             }
         });
 

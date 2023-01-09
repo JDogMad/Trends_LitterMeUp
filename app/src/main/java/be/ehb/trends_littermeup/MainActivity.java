@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavView = findViewById(R.id.navigation);
         mToolbar = findViewById(R.id.toolbar);

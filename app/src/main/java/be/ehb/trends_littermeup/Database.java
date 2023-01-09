@@ -80,7 +80,9 @@ public class Database {
                 user.setValue(documentSnapshot.toObject(User.class));
             }
         });
-    return user;
+
+
+        return user;
     }
 
     public Task<Void> changePointsOnUser(int punten, User user){

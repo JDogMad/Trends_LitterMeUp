@@ -5,14 +5,17 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class NewPostViewModel extends ViewModel {
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<String> title;
 
     public NewPostViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        title = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<String> getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.setValue(title);
     }
 }
