@@ -43,6 +43,10 @@ public class HomeFragment extends Fragment {
         }
 
         //TODO: CHANGE ADAPTER TO SHOW PLACES
+        // TODO: UPDATE TABLE
+        // TODO: LAYOUT CHANGE
+
+        // TODO: SET THIS ON OTHER THREAD
         txt_greeting = root.findViewById(R.id.txt_greeting);
         txt_points = root.findViewById(R.id.txt_points);
         txt_cash = root.findViewById(R.id.txt_cash);
