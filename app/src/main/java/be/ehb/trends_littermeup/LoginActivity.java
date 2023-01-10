@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
-            System.out.println("User is not null:" + mAuth.getCurrentUser());
             finish();
             return;
         }

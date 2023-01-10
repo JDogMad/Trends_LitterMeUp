@@ -126,5 +126,10 @@
 
 
     <string name="select_language">Choose your language</string>
+    <string name="title_takeJob">Take the job</string>
+    <string name="subTitle_takeJob">Fight the streets</string>
+    <string name="job_title">Feedback</string>
+    <string name="btn_job">job done</string>
+    <string name="job_info">Information</string>
 
 </resources>

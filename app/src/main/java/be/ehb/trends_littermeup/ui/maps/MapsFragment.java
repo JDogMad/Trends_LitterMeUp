@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,6 +43,7 @@ import java.util.Objects;
 
 import be.ehb.trends_littermeup.LatLngDeserializer;
 import be.ehb.trends_littermeup.Post;
+import be.ehb.trends_littermeup.R;
 import be.ehb.trends_littermeup.databinding.FragmentMapsBinding;
 import be.ehb.trends_littermeup.ui.home.HomeViewModel;
 
@@ -48,11 +51,7 @@ public class MapsFragment extends Fragment {
 
     private FragmentMapsBinding binding;
     private GoogleMap map;
-
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    private String title;
-    private LatLng mapLocation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -79,7 +78,14 @@ public class MapsFragment extends Fragment {
                         Map<String, Object> data = document.getData();
                         Post post = new Post();
                         // Set the fields for the Post object
+                        if (data.get("id") instanceof Long) {
+                            post.setId(((Long) data.get("id")).intValue());
+                        } else if (data.get("id") instanceof Integer) {
+                            post.setId((Integer) data.get("id"));
+                        }
                         post.setTitel((String) data.get("titel"));
+                        post.setDescription((String) data.get("description"));
+
 
                         // Check if there is a location in post => avoids errors
                         if (data.containsKey("location")) {
@@ -106,8 +112,30 @@ public class MapsFragment extends Fragment {
                             }
 
                             // Add a marker to the map using the deserialized LatLng object
-                            map.addMarker(new MarkerOptions().position(location).title(post.getTitel()));
+                            map.addMarker(new MarkerOptions().position(location)
+                                    .title(post.getTitel())
+                                    .snippet(post.getDescription()));
+
                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 10));
+                            map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(@NonNull Marker marker) {
+                                        // Do something here when the marker is clicked
+                                        JobFragment jobFragment = new JobFragment();
+                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                        ft.replace(R.id.const_maps, jobFragment);
+                                        ft.addToBackStack(null);
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("postTitle", marker.getTitle());
+                                        bundle.putString("postDescription", marker.getSnippet());
+                                        bundle.putInt("postId", post.getId());
+                                        jobFragment.setArguments(bundle);
+
+                                        ft.commit();
+                                        return false;
+                                }
+                            });
                         }
                     }
                 } else {

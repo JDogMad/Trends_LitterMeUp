@@ -216,56 +216,56 @@ public class NewPostFragment extends Fragment implements LocationListener {
     }
 
 
-    private void getUserLocation() {
-        //TODO: PERMISSION DENIED OR NOT GIVEN => BE SURE TO ASK
-        locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String bestProvider = locationManager.getBestProvider(criteria, true);
+        private void getUserLocation() {
+            //TODO: PERMISSION DENIED OR NOT GIVEN => BE SURE TO ASK
+            locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            String bestProvider = locationManager.getBestProvider(criteria, true);
 
-        // A listener for any updates of location
-        LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                // Is changed when there is a new provider
+            // A listener for any updates of location
+            LocationListener locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    // Is changed when there is a new provider
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    latLng = new LatLng(latitude, longitude);
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+                public void onProviderEnabled(String provider) {}
+
+                public void onProviderDisabled(String provider) {}
+            };
+
+            if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+                return;
+            }
+
+            List<String> providers = locationManager.getProviders(true);
+            if (!providers.isEmpty()) {
+                String provider = providers.get(0);
+                locationManager.requestLocationUpdates(provider, 0, 0, locationListener);
+            }
+
+            if (location != null) {
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
                 latLng = new LatLng(latitude, longitude);
             }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-            public void onProviderEnabled(String provider) {}
-
-            public void onProviderDisabled(String provider) {}
-        };
-
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_LOCATION_PERMISSION);
-            return;
         }
 
-        List<String> providers = locationManager.getProviders(true);
-        if (!providers.isEmpty()) {
-            String provider = providers.get(0);
-            locationManager.requestLocationUpdates(provider, 0, 0, locationListener);
-        }
 
-        if (location != null) {
+        @Override
+        public void onLocationChanged(Location location) {
+            // Update the latitude and longitude when the location changes
             latitude = location.getLatitude();
             longitude = location.getLongitude();
             latLng = new LatLng(latitude, longitude);
         }
-    }
-
-
-    @Override
-    public void onLocationChanged(Location location) {
-        // Update the latitude and longitude when the location changes
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
-        latLng = new LatLng(latitude, longitude);
-    }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {

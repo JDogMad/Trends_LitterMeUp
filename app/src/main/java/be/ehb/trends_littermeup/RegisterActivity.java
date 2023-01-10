@@ -33,6 +33,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         //Initialize Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser() != null){
-            System.out.println("User is not null:" + mAuth.getCurrentUser());
             finish();
             return;
         }
