@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -165,12 +167,19 @@ public class ProfileFragment extends Fragment {
     public void fillUserData(TextView username, TextView points, TextView level){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         Database database = new Database();
-        database.getUserFromDbByUid(mAuth.getUid()).observe(getViewLifecycleOwner(), new Observer<User>() {
+        Task<User> userTask = database.getUserFromDbByUidTask(mAuth.getUid());
+        userTask.addOnCompleteListener(new OnCompleteListener<User>() {
             @Override
-            public void onChanged(User user) {
-                username.setText(user.getUsername());
-                points.setText(Integer.toString(user.getPoints()) + " points");
-                level.setText("Level " +  Integer.toString(user.getUserLevel(user.getPoints())));
+            public void onComplete(@NonNull Task<User> task) {
+                if (task.isSuccessful()) {
+                    User user = task.getResult();
+                    System.out.println(user.toString());
+                    username.setText(user.getUsername());
+                    points.setText(Integer.toString(user.getPoints()) + " points");
+                    level.setText("Level " +  Integer.toString(user.getUserLevel(user.getPoints())));
+                } else {
+                    // Handle error
+                }
             }
         });
     }

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -84,6 +85,21 @@ public class Database {
 
         return user;
     }
+
+    public Task<User> getUserFromDbByUidTask(String uid) {
+        return db.collection("Users").document(uid).get().continueWith(new Continuation<DocumentSnapshot, User>() {
+            @Override
+            public User then(@NonNull Task<DocumentSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                DocumentSnapshot document = task.getResult();
+                User user = document.toObject(User.class);
+                return user;
+            }
+        });
+    }
+
 
     public Task<Void> changePointsOnUser(int punten, User user){
         DocumentReference documentReference = db.collection("Users").document(user.getUid());
