@@ -39,8 +39,7 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        //TODO: REDIRECT BIG TRASH and SMALL TRASH => TO NEWPOST
+        
         btn_smallTrash = root.findViewById(R.id.btn_camera_smallTrash);
         btn_smallTrash.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +54,10 @@ public class DashboardFragment extends Fragment {
                 button1.setVisibility(View.GONE);
                 button2.setVisibility(View.GONE);
                 button4.setVisibility(View.GONE);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("smallTrash", "Small trash");
+                newPostFragment.setArguments(bundle);
 
                 transaction.replace(R.id.const_dashboard, newPostFragment);
                 transaction.addToBackStack(null);
@@ -76,6 +79,10 @@ public class DashboardFragment extends Fragment {
                 button1.setVisibility(View.GONE);
                 button2.setVisibility(View.GONE);
                 button4.setVisibility(View.GONE);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("bigTrash", "Big trash");
+                newPostFragment.setArguments(bundle);
 
                 transaction.replace(R.id.const_dashboard, newPostFragment);
                 transaction.addToBackStack(null);

@@ -50,6 +50,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -79,6 +81,7 @@ public class NewPostFragment extends Fragment implements LocationListener {
     private double latitude, longitude;
 
     NewPostViewModel viewModel;
+    String bigTrash, smallTrash;
     TextView txt_newPostTitle;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -88,6 +91,17 @@ public class NewPostFragment extends Fragment implements LocationListener {
         View root = binding.getRoot();
 
         getUserLocation();
+
+        txt_newPostTitle = root.findViewById(R.id.txt_newPost_title);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            if(bundle.containsKey("bigTrash")){
+                txt_newPostTitle.setText("Big trash");
+            } else if(bundle.containsKey("smallTrash")){
+                txt_newPostTitle.setText("Small trash");
+            }
+        }
+
 
         Button addPic = root.findViewById(R.id.btn_addPic);
         EditText titlePost = root.findViewById(R.id.txt_newPost_title);
@@ -108,19 +122,33 @@ public class NewPostFragment extends Fragment implements LocationListener {
                         @Override
                         public void onChanged(Integer integer) {
                             int tempId = integer.intValue() + 1;
-                            Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(), latLng,tempId);
-                            post.setNameFile("Image-" + post.getId() + ".jpg");
-                            savePicture(post);
-                            db.add(post);
-                            FragmentManager fragmentManager = getFragmentManager();
-                            if (fragmentManager != null) {
-                                Button button1 = getView().findViewById(R.id.btn_addPic);
-                                Button button2 = getView().findViewById(R.id.btn_post);
+                            if(latLng != null){
+                                Post post = new Post(bitmap, titlePost.getText().toString(), descriptionPost.getText().toString(), latLng,tempId);
+                                post.setNameFile("Image-" + post.getId() + ".jpg");
+                                savePicture(post);
+                                db.add(post);
+                                FragmentManager fragmentManager = getFragmentManager();
+                                if (fragmentManager != null) {
+                                    Button button1 = getView().findViewById(R.id.btn_addPic);
+                                    Button button2 = getView().findViewById(R.id.btn_post);
 
-                                button1.setVisibility(View.GONE);
-                                button2.setVisibility(View.GONE);
+                                    button1.setVisibility(View.GONE);
+                                    button2.setVisibility(View.GONE);
 
-                                fragmentManager.beginTransaction().replace(R.id.const_newpost, new DashboardFragment()).commit();
+                                    fragmentManager.beginTransaction().replace(R.id.const_newpost, new DashboardFragment()).commit();
+                                }
+                            } else {
+                                FragmentManager fragmentManager = getFragmentManager();
+                                if (fragmentManager != null) {
+                                    Button button1 = getView().findViewById(R.id.btn_addPic);
+                                    Button button2 = getView().findViewById(R.id.btn_post);
+
+                                    button1.setVisibility(View.GONE);
+                                    button2.setVisibility(View.GONE);
+
+                                    fragmentManager.beginTransaction().replace(R.id.const_newpost, new DashboardFragment()).commit();
+                                }
+                                Toast.makeText(getContext(), "Something went wrong, please make sure your location is on", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -217,7 +245,7 @@ public class NewPostFragment extends Fragment implements LocationListener {
 
 
         private void getUserLocation() {
-            //TODO: PERMISSION DENIED OR NOT GIVEN => BE SURE TO ASK
+            Toast.makeText(getContext(), "Please make sure that the location is on.", Toast.LENGTH_SHORT).show();
             locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             String bestProvider = locationManager.getBestProvider(criteria, true);
