@@ -129,17 +129,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.90" />
 
-    <TextView
-        android:id="@+id/app_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholder_location"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_3" />
-
     <LinearLayout
         android:id="@+id/app_shape_1"
         android:layout_width="0dp"
@@ -209,7 +198,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txt_contributions"
+        android:id="@+id/txt_contribution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -232,7 +221,7 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/img_helper_8"
         app:layout_constraintEnd_toEndOf="@+id/img_helper_9"
-        app:layout_constraintTop_toBottomOf="@+id/txt_contributions" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_contribution" />
 
     <TextView
         android:id="@+id/txt_contribution_hours"
@@ -261,11 +250,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/img_helper_11"
-        tools:itemCount="5"
+        app:layout_constraintHeight_percent="0.9"
         tools:listitem="@layout/adapter_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

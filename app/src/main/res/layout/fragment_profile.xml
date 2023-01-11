@@ -167,6 +167,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.57" />
+
+
     <TextView
         android:id="@+id/app_profile_sub"
         android:layout_width="0dp"
@@ -255,24 +263,22 @@
         android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/rc_friends"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_6"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
+        app:layout_constraintTop_toTopOf="@+id/img_helper_22" />
 
     <Button
         android:id="@+id/btn_moreFriends"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:background="?android:selectableItemBackground"
         android:text="@string/subTitle_friends_more"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_10"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_12"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_17"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_9" />
+        app:layout_constraintStart_toStartOf="@+id/img_helper_17" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_friends"
@@ -280,7 +286,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_10"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_12"
         tools:itemCount="2"
         tools:listitem="@layout/adapter_friends" />
 

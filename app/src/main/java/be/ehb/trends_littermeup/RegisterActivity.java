@@ -26,8 +26,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -103,6 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 });
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                setStartTime();
                                 showMainActivity();
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -115,7 +118,22 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // Method to get startTime
+    public void setStartTime(){
+        Map<String, Object> startData = new HashMap<>();
+        startData.put("startTime", FieldValue.serverTimestamp());
 
+        FirebaseFirestore.getInstance()
+                .collection("Users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .update(startData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Start time has been saved
+                    }
+                });
+    }
 
 
 

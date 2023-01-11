@@ -107,6 +107,12 @@ public class Database {
         return documentReference.set(user);
     }
 
+    public Task<Void> changeContributionsOnUser(int contributions, User user){
+        DocumentReference documentReference = db.collection("Users").document(user.getUid());
+        user.setPoints(contributions);
+        return documentReference.set(user);
+    }
+
 
     public MutableLiveData<Integer> getUserCount() {
         MutableLiveData<Integer> count = new MutableLiveData<Integer>();

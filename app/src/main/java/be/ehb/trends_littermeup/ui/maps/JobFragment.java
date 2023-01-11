@@ -37,7 +37,7 @@ public class JobFragment extends Fragment {
     TextView job_info, txt_feedback;
     Button btn_take_job;
     String postDescription, postTitle;
-    int postId, newTotal;
+    int postId, newTotal, contribution;
     Database database = new Database();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -75,10 +75,11 @@ public class JobFragment extends Fragment {
                                     @Override
                                     public void onChanged(User user) {
                                         int points = user.getPoints();
-                                        System.out.println("POINTS: " + points);
+                                        int contributions = user.getContributions();
                                         newTotal = points + getRandomInt(1, 150);
-                                        System.out.println("NEW POINTS: " + newTotal);
+                                        contribution = contributions + 1;
                                         database.changePointsOnUser(newTotal, user);
+                                        database.changeContributionsOnUser(contribution, user);
                                     }
                                 });
                                 Toast.makeText(getContext(), "Good job!", Toast.LENGTH_SHORT).show();

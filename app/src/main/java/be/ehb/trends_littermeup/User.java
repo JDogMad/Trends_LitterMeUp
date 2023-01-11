@@ -5,17 +5,18 @@ import android.media.Image;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
 
 import java.util.List;
 public class User {
     private List<Integer> friendId;
     private String email, username;
-    private int points,id;
+    private int points,id, contributions;
     private double balance;
     private Image profilePicture;
     private String uid;
-
+    private Timestamp startTime, endTime;
 
 
     public User() {
@@ -25,6 +26,9 @@ public class User {
         this.uid = uid;
         this.points = 0;
         this.balance = 0;
+        this.startTime = Timestamp.now();
+        this.endTime = Timestamp.now();
+        this.contributions = 0;
         this.id = id;
         this.email = email;
         this.username = username;
@@ -97,6 +101,30 @@ public class User {
 
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public int getContributions() {
+        return contributions;
+    }
+
+    public void setContributions(int contributions) {
+        this.contributions = contributions;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
 
     public String getUid() {

@@ -27,10 +27,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import be.ehb.trends_littermeup.LoginActivity;
 import be.ehb.trends_littermeup.R;
@@ -182,7 +187,25 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    public void setEndTime(){
+        Map<String, Object> endData = new HashMap<>();
+        endData.put("endTime", FieldValue.serverTimestamp());
+
+        FirebaseFirestore.getInstance()
+                .collection("Users")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .update(endData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // End time has been saved
+                    }
+                });
+    }
+
+
     private void logoutUser(){
+        setEndTime();
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
