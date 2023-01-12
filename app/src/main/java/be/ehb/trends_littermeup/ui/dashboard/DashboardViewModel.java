@@ -1,6 +1,7 @@
 package be.ehb.trends_littermeup.ui.dashboard;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -66,6 +67,7 @@ public class DashboardViewModel extends AndroidViewModel {
                     post.setId(((Long) data.get("id")).intValue());
                     post.setTitel((String) data.get("titel"));
                     post.setDescription((String) data.get("description"));
+                    post.setNameFile((String) data.get("nameFile"));
 
                     Object locationData = data.get("location");
                     if (locationData != null) {
@@ -87,7 +89,6 @@ public class DashboardViewModel extends AndroidViewModel {
                         }
                         post.setLocation(location);
                     }
-
                     postList.add(post);
                 }
                 posts.setValue(postList);

@@ -152,8 +152,6 @@ public class NewPostFragment extends Fragment implements LocationListener {
                             }
                         }
                     });
-
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
                 }else{
                     if(titlePost.getText().toString().isEmpty()){
                         titlePost.setBackground(getResources().getDrawable(R.drawable.app_shape_2_error));

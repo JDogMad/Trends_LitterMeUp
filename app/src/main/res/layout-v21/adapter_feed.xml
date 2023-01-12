@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_gray">
+        android:background="?android:attr/colorPrimary">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/img_helper_1"
@@ -104,7 +104,7 @@
             android:layout_marginTop="5dp"
             android:text="@string/txt_postTitle"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/colorPrimaryDark"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
             app:layout_constraintStart_toStartOf="@+id/img_helper_1"
@@ -116,7 +116,7 @@
             android:layout_height="70dp"
             android:text="@string/txt_postDescription"
             android:textAlignment="textStart"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/colorPrimaryDark"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/img_helper_7"
             app:layout_constraintEnd_toStartOf="@+id/img_helper_2"

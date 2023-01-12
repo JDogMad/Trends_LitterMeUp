@@ -5,7 +5,7 @@
     android:id="@+id/const_shop100"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_gray">
+    android:background="?android:attr/colorPrimary">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/img_helper_1"

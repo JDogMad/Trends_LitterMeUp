@@ -20,9 +20,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,6 +46,7 @@ import be.ehb.trends_littermeup.util.FriendsAdapter;
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private Button btn_coupon_5, btn_coupon_50, btn_coupon_100, btn_addFriends;
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -148,13 +153,13 @@ public class ProfileFragment extends Fragment {
         binding.rcFriends.setLayoutManager(layoutManager);
         viewModel.getAllFriends().observe(getViewLifecycleOwner(), new Observer<List<User>>() {
             @Override
-            public void onChanged(List<User> users) {
+            public void onChanged(List<User> users)  {
                 friendsAdapter.addItems(users);
             }
         });
 
-        //TODO: Change the profile picture of the user
-        // But only with selected profiles pictures
+        //  TODO: Change the profile picture of the user
+        //      But only with selected profiles pictures
         return root;
     }
 
@@ -177,8 +182,36 @@ public class ProfileFragment extends Fragment {
                     username.setText(user.getUsername());
                     points.setText(Integer.toString(user.getPoints()) + " points");
                     level.setText("Level " +  Integer.toString(user.getUserLevel(user.getPoints())));
+
+                    int level_check = user.getUserLevel(user.getPoints());
+
+                    if(level_check == 100){
+                        db.collection("Achievements").whereEqualTo("title",
+                                "We got it, you care!").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    QuerySnapshot result = task.getResult();
+                                    if (!result.isEmpty()) {
+                                        DocumentSnapshot achievement = result.getDocuments().get(0);
+                                        String achievementId = achievement.getId();
+                                        ArrayList<String> userIds = (ArrayList<String>) achievement.get("userId");
+
+                                        if(userIds == null){
+                                            userIds = new ArrayList<>();
+                                        }
+
+                                        userIds.add(mAuth.getCurrentUser().getUid()); // add the user's ID to the userIds list
+                                        db.collection("Achievements").document(achievementId).update("userId", userIds);
+                                        db.collection("Users").document(mAuth.getCurrentUser().getUid()).update("points", user.getPoints() + 250);
+                                    }
+                                }
+                            }
+                        });
+                    }
                 } else {
                     // Handle error
+
                 }
             }
         });

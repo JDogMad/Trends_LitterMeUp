@@ -1,25 +1,15 @@
 package be.ehb.trends_littermeup.ui.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.nfc.FormatException;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.Tag;
-import android.nfc.tech.Ndef;
-import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -32,10 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import be.ehb.trends_littermeup.LoginActivity;
 import be.ehb.trends_littermeup.R;
@@ -44,10 +34,11 @@ import be.ehb.trends_littermeup.databinding.FragmentSettingsBinding;
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
 
-    Button termsAndConditions, privacy, feedback, selected_language, logout, darkmode;
+    Button termsAndConditions, privacy, feedback, selected_language, logout, darkmode, achievements;
     String languageCode;
 
     String[] languageCodes = {"en", "nl", "fr"};
+    private boolean isDarkModeEnabled = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -142,24 +133,43 @@ public class SettingsFragment extends Fragment {
 
 
         // TODO: FIX THIS SHIT
-        /*darkmode = root.findViewById(R.id.btn_nightmode);
+        darkmode = root.findViewById(R.id.btn_nightmode);
         darkmode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int currentNightMode = AppCompatDelegate.getDefaultNightMode();
-                if (currentNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-                    // Switch to light theme
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                } else {
-                    // Switch to dark theme
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                }
-                // Get the parent activity
-                //getActivity().recreate();
-            }
-        });*/
+                int nightMode = AppCompatDelegate.getDefaultNightMode();
 
-        // TODO: THINK ABOUT ACHIEVEMENTS
+                if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    darkmode.setText("Light mode");
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    darkmode.setText("Dark mode");
+                }
+                requireActivity().recreate();
+            }
+        });
+
+        achievements = root.findViewById(R.id.btn_achievements);
+        achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new instance of the terms and conditions fragment
+                AchievementsFragment achievementsFragment = new AchievementsFragment();
+
+                // Begin the fragment transaction
+                assert getFragmentManager() != null;
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                // Replace the current fragment with the new fragment
+                transaction.replace(R.id.container, achievementsFragment);
+                transaction.addToBackStack(null);
+
+                // Commit the transaction
+                transaction.commit();
+            }
+        });
+
 
         return root;
     }

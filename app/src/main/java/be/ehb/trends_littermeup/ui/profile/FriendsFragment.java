@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,11 +54,27 @@ import be.ehb.trends_littermeup.util.FriendsListAdapter;
 public class FriendsFragment extends Fragment {
     private FragmentFriendsBinding binding;
 
+    Button btn_back;
     EditText txt_addFriends;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         binding = FragmentFriendsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        btn_back = root.findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.const_friends, new ProfileFragment());
+
+                Button button2 = getView().findViewById(R.id.btn_back);
+
+                button2.setVisibility(View.GONE);
+
+                fragmentTransaction.commit();
+            }
+        });
 
         txt_addFriends = root.findViewById(R.id.txt_search);
         txt_addFriends.setOnEditorActionListener(new TextView.OnEditorActionListener() {

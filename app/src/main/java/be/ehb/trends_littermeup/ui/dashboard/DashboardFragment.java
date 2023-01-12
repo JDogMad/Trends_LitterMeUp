@@ -39,7 +39,7 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        
+
         btn_smallTrash = root.findViewById(R.id.btn_camera_smallTrash);
         btn_smallTrash.setOnClickListener(new View.OnClickListener() {
             @Override

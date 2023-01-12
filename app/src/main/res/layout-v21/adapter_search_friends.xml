@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_gray">
+        android:background="?android:attr/colorPrimary">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/img_helper_1"
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             app:icon="@drawable/ic_green_plus_24dp"
-            app:iconTint="@color/main_gray"
+            app:iconTint="?android:attr/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/img_helper_12"
             app:layout_constraintEnd_toStartOf="@+id/img_helper_9"
             app:layout_constraintStart_toStartOf="@+id/img_helper_10"
@@ -143,15 +143,12 @@
             android:layout_height="wrap_content"
             android:text="@string/placeholder_username"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="?android:attr/colorPrimaryDark"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/img_helper_5"
             app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
             app:layout_constraintStart_toStartOf="@+id/img_helper_6"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

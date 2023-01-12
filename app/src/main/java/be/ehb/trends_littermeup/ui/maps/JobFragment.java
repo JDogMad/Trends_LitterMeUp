@@ -18,10 +18,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import be.ehb.trends_littermeup.Database;
@@ -80,6 +82,77 @@ public class JobFragment extends Fragment {
                                         contribution = contributions + 1;
                                         database.changePointsOnUser(newTotal, user);
                                         database.changeContributionsOnUser(contribution, user);
+                                        System.out.println(user.toString());
+
+                                        if(contributions == 1){
+                                            db.collection("Achievements").whereEqualTo("title", "What a start!").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        QuerySnapshot result = task.getResult();
+                                                        if (!result.isEmpty()) {
+                                                            DocumentSnapshot achievement = result.getDocuments().get(0);
+                                                            String achievementId = achievement.getId();
+                                                            ArrayList<String> userIds = (ArrayList<String>) achievement.get("userId");
+
+                                                            if(userIds == null){
+                                                                userIds = new ArrayList<>();
+                                                            }
+
+                                                            userIds.add(mAuth.getCurrentUser().getUid()); // add the user's ID to the userIds list
+                                                            db.collection("Achievements").document(achievementId).update("userId", userIds);
+                                                            db.collection("Users").document(mAuth.getCurrentUser().getUid()).update("points", user.getPoints() + 5);
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        } else if (contributions == 10){
+                                            db.collection("Achievements").whereEqualTo("title",
+                                                    "Strong start").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        QuerySnapshot result = task.getResult();
+                                                        if (!result.isEmpty()) {
+                                                            DocumentSnapshot achievement = result.getDocuments().get(0);
+                                                            String achievementId = achievement.getId();
+                                                            ArrayList<String> userIds = (ArrayList<String>) achievement.get("userId");
+
+                                                            if(userIds == null){
+                                                                userIds = new ArrayList<>();
+                                                            }
+
+                                                            userIds.add(mAuth.getCurrentUser().getUid()); // add the user's ID to the userIds list
+                                                            db.collection("Achievements").document(achievementId).update("userId", userIds);
+                                                            db.collection("Users").document(mAuth.getCurrentUser().getUid()).update("points", user.getPoints() + 10);
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        } else if (contributions == 100){
+                                            db.collection("Achievements").whereEqualTo("title",
+                                                    "You are going for it").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        QuerySnapshot result = task.getResult();
+                                                        if (!result.isEmpty()) {
+                                                            DocumentSnapshot achievement = result.getDocuments().get(0);
+                                                            String achievementId = achievement.getId();
+                                                            ArrayList<String> userIds = (ArrayList<String>) achievement.get("userId");
+
+                                                            if(userIds == null){
+                                                                userIds = new ArrayList<>();
+                                                            }
+
+                                                            userIds.add(mAuth.getCurrentUser().getUid()); // add the user's ID to the userIds list
+                                                            db.collection("Achievements").document(achievementId).update("userId", userIds);
+                                                            db.collection("Users").document(mAuth.getCurrentUser().getUid()).update("points", user.getPoints() + 100);
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                        }
                                     }
                                 });
                                 Toast.makeText(getContext(), "Good job!", Toast.LENGTH_SHORT).show();

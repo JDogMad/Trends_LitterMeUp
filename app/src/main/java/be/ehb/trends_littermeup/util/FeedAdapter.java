@@ -1,6 +1,8 @@
 package be.ehb.trends_littermeup.util;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,10 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.List;
 
@@ -46,11 +51,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
             txt_postTitle = itemView.findViewById(R.id.txt_titlePosted);
             txt_postDescription = itemView.findViewById(R.id.txt_descriptionPosted);
-            img_userPosted = itemView.findViewById(R.id.img_userPosted_pic);
             img_feedPost = itemView.findViewById(R.id.img_feedPost);
         }
     }
-
 
     @NonNull
     @Override
@@ -64,6 +67,18 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         Post currentItem = items.get(position);
         holder.txt_postTitle.setText(currentItem.getTitel());
         holder.txt_postDescription.setText(currentItem.getDescription());
+
+        System.out.println(currentItem.getNameFile());
+        FirebaseStorage.getInstance().getReference().child(currentItem.getNameFile()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String imageUrl = uri.toString();
+                // Now you can use Glide library to load image from the url
+                Glide.with(holder.itemView.getContext()).load(imageUrl).into(holder.img_feedPost);
+            }
+        });
+
+
         holder.img_feedPost.setImageBitmap(currentItem.getBitmap());
     }
 
@@ -71,5 +86,4 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     public int getItemCount() {
         return items.size();
     }
-
 }

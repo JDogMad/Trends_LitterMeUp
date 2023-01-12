@@ -1,5 +1,7 @@
 package be.ehb.trends_littermeup.ui.profile;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Application;
 import android.util.Log;
 import android.view.View;
@@ -24,12 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import be.ehb.trends_littermeup.Achievements;
 import be.ehb.trends_littermeup.LatLngDeserializer;
 import be.ehb.trends_littermeup.Post;
 import be.ehb.trends_littermeup.R;
@@ -78,6 +82,7 @@ public class ProfileViewModel extends AndroidViewModel {
 
         return friendsList;
     }
+
 
 
 }

@@ -26,15 +26,19 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,29 @@ public class RegisterActivity extends AppCompatActivity {
                                         int tempId = integer.intValue() + 1;
                                         User newUser = new User(email,username,mAuth.getCurrentUser().getUid(),tempId);
                                         database.add(newUser);
+
+                                        db.collection("Achievements").whereEqualTo("title", "Registration complete").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    QuerySnapshot result = task.getResult();
+                                                    if (!result.isEmpty()) {
+                                                        DocumentSnapshot achievement = result.getDocuments().get(0);
+                                                        String achievementId = achievement.getId();
+                                                        ArrayList<String> userIds = (ArrayList<String>) achievement.get("userId");
+
+                                                        if(userIds == null){
+                                                            userIds = new ArrayList<>();
+                                                        }
+
+                                                        userIds.add(mAuth.getCurrentUser().getUid()); // add the user's ID to the userIds list
+                                                        db.collection("Achievements").document(achievementId).update("userId", userIds);
+                                                        db.collection("Users").document(mAuth.getCurrentUser().getUid()).update("points", newUser.getPoints() + 10);
+                                                    }
+                                                }
+                                            }
+                                        });
+
                                     }
                                 });
                                 Log.d(TAG, "createUserWithEmail:success");

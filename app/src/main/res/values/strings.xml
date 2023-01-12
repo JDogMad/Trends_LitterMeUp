@@ -131,5 +131,7 @@
     <string name="job_title">Feedback</string>
     <string name="btn_job">job done</string>
     <string name="job_info">Information</string>
+    <string name="txt_achievement_title">Title</string>
+    <string name="txt_achievement_description">Description</string>
 
 </resources>

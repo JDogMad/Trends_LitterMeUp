@@ -39,6 +39,7 @@ public class Database {
     public User user;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
+
     public Database() {
     }
 
@@ -52,6 +53,10 @@ public class Database {
         File file = new File(myDir, imageName);
         storage.getReference(imageName).putFile(Uri.fromFile(file));
         return db.collection("Posts").document().set(post);
+    }
+
+    public Task<Void> addAchievement(Achievements achievement){
+        return db.collection("Achievements").document().set(achievement);
     }
 
     public MutableLiveData<List<Post>> getAllPostsDB(){
@@ -99,7 +104,6 @@ public class Database {
             }
         });
     }
-
 
     public Task<Void> changePointsOnUser(int punten, User user){
         DocumentReference documentReference = db.collection("Users").document(user.getUid());

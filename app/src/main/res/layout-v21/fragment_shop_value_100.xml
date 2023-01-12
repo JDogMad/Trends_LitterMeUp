@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/const_shop50"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/const_shop100"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorPrimary">
@@ -71,6 +72,7 @@
         app:layout_constraintBottom_toTopOf="@+id/img_helper_5"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1" />
 
+
     <!-- App logo -->
     <ImageView
         android:id="@+id/app_logo"
@@ -85,7 +87,7 @@
         app:srcCompat="@drawable/app_logo" />
 
     <Button
-        android:id="@+id/btn_redeem_50"
+        android:id="@+id/btn_redeem_100"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -101,9 +103,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="@string/redeem_50"
+        android:text="@string/redeem_100"
         android:textAlignment="center"
-        android:textColor="@color/main_black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
@@ -116,7 +118,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/enjoy"
         android:textAlignment="center"
-        android:textColor="@color/main_black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/coupon_title"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
@@ -130,7 +132,7 @@
         android:inputType="textMultiLine"
         android:text="@string/redeem_description"
         android:textAlignment="center"
-        android:textColor="@color/main_black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
         app:layout_constraintStart_toStartOf="@+id/img_helper_7"
@@ -143,7 +145,7 @@
         android:layout_marginTop="45dp"
         android:inputType="textMultiLine"
         android:textAlignment="center"
-        android:textColor="@color/main_black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_8"
         app:layout_constraintStart_toStartOf="@+id/img_helper_7"

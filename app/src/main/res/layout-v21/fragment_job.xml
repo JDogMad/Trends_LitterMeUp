@@ -2,21 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/const_job"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/colorPrimary"
-    tools:context=".ui.feed.NewPostFragment"
-    android:id="@+id/const_newpost">
+    tools:context=".ui.maps.JobFragment">
 
 
     <TextView
-        android:id="@+id/app_newPost"
+        android:id="@+id/app_takeJob"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/title_newPost"
+        android:text="@string/title_takeJob"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,13 +26,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="@string/subTitle_newPost"
+        android:text="@string/subTitle_takeJob"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/app_newPost" />
+        app:layout_constraintTop_toBottomOf="@+id/app_takeJob" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -119,69 +119,45 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.33" />
 
-    <LinearLayout
-        android:id="@+id/app_shape_1"
+    <TextView
+        android:id="@+id/job_info"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/app_shape_2"
-        android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_4"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_3"
-        app:layout_constraintVertical_bias="0.0"/>
-
-    <Button
-        android:id="@+id/btn_addPic"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_gray_plus_24dp"
-        app:backgroundTint="@color/main_gray"
-        app:layout_constraintStart_toStartOf="@id/img_helper_9"
-        app:layout_constraintEnd_toEndOf="@id/img_helper_10"
-        app:layout_constraintTop_toTopOf="@+id/img_helper_11"
-        app:layout_constraintBottom_toBottomOf="@+id/img_helper_12" />
+        android:layout_height="wrap_content"
+        android:text="@string/job_info"
+        android:textAlignment="textStart"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_3" />
 
     <TextView
-        android:id="@+id/app_post_title"
+        android:id="@+id/job_info_description"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:background="@drawable/app_shape_5"
+        app:layout_constraintBottom_toTopOf="@+id/img_helper_4"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toBottomOf="@+id/job_info" />
+
+
+    <TextView
+        android:id="@+id/app_job_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="@string/post_title"
+        android:text="@string/job_title"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/img_helper_1"
         app:layout_constraintTop_toBottomOf="@+id/img_helper_5" />
 
     <EditText
-        android:id="@+id/txt_newPost_title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/app_shape_5"
-        android:ems="9"
-        android:inputType="text"
-        android:textColor="@color/main_black"
-        app:layout_constraintBottom_toTopOf="@+id/img_helper_7"
-        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
-        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/app_post_title" />
-
-    <TextView
-        android:id="@+id/app_post_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/post_description"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/img_helper_6" />
-
-    <EditText
-        android:id="@+id/txt_newPost_description"
+        android:id="@+id/txt_job_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/app_shape_5"
@@ -191,19 +167,20 @@
         app:layout_constraintBottom_toTopOf="@+id/img_helper_8"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintStart_toStartOf="@+id/img_helper_1"
-        app:layout_constraintTop_toBottomOf="@+id/app_post_description" />
+        app:layout_constraintTop_toBottomOf="@+id/app_job_title" />
 
     <Button
-        android:id="@+id/btn_post"
+        android:id="@+id/btn_jobdone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="?android:selectableItemBackground"
-        android:text="@string/btn_post"
+        android:text="@string/btn_job"
         android:textAlignment="textEnd"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/colorPrimaryDark"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
         app:layout_constraintTop_toTopOf="@+id/img_helper_8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
