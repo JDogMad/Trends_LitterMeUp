@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorPrimary"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/txt_greeting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/subTitle_home_username"
+        android:textAlignment="textStart"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_home_sub"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/subTitle_home"
+        android:textAlignment="textStart"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toBottomOf="@+id/txt_greeting" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5813953" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.53" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.67" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.77" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_helper_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <LinearLayout
+        android:id="@+id/app_shape_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_2"
+        android:orientation="horizontal"
+        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintBottom_toBottomOf="@+id/img_helper_5"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_2"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_1"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_4"
+        app:layout_constraintVertical_bias="0.0">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/app_title_littercash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/title_littercash"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_2"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toBottomOf="@+id/img_helper_4" />
+
+    <TextView
+        android:id="@+id/txt_points"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/placeholder_points"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_2"
+        app:layout_constraintTop_toBottomOf="@+id/app_title_littercash" />
+
+
+    <TextView
+        android:id="@+id/txt_cash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/placeholder_pointsToCash"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_points" />
+
+    <LinearLayout
+        android:id="@+id/app_shape_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/app_shape_gray_1"
+        android:orientation="horizontal"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintBottom_toBottomOf="@+id/img_helper_7"
+        app:layout_constraintEnd_toStartOf="@+id/img_helper_9"
+        app:layout_constraintStart_toStartOf="@+id/img_helper_8"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_6"
+        app:layout_constraintVertical_bias="0.0">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_contribution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/placeholder_contributions"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_8"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_9"
+        app:layout_constraintTop_toBottomOf="@+id/img_helper_6" />
+
+    <TextView
+        android:id="@+id/txt_contributions_days"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/placeholder_contributionsInDays"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_8"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_9"
+        app:layout_constraintTop_toBottomOf="@+id/txt_contribution" />
+
+    <TextView
+        android:id="@+id/txt_contribution_hours"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/placeholder_contributionInHours"
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_8"
+        app:layout_constraintEnd_toEndOf="@+id/img_helper_9"
+        app:layout_constraintTop_toBottomOf="@+id/txt_contributions_days" />
+
+    <TextView
+        android:id="@+id/app_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/subTitle_history"
+        android:textAlignment="textStart"
+        android:textColor="?android:attr/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/img_helper_1"
+        app:layout_constraintTop_toBottomOf="@+id/img_helper_10" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="@+id/img_helper_11"
+        app:layout_constraintHeight_percent="0.9"
+        tools:listitem="@layout/adapter_history" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
