@@ -134,7 +134,7 @@ public class Shop50Fragment extends Fragment {
                     Session session = Session.getDefaultInstance(props,
                             new javax.mail.Authenticator() {
                                 protected PasswordAuthentication getPasswordAuthentication() {
-                                    return new PasswordAuthentication("help.littermeup@gmail.com", "hecptbiqaiyzjvmq");
+                                    return new PasswordAuthentication("help.littermeup@gmail.com", "wehwpibgmbimldto");
                                 }
                             });
 
